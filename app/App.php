@@ -24,6 +24,10 @@ class App
         // Routes Pages
         $router->get('/accueil', 'Home#index', false);
 
+        // Routes Authentification
+        $router->post('/connexion', 'Auth#login', false);
+        $router->get('/deconnexion', 'Auth#logout', false);
+
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);
 
