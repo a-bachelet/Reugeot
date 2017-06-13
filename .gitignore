@@ -6,4 +6,8 @@
 
 ## BuildIt Framework
 
-core/
+core
+
+## Database config
+
+config/database.php
