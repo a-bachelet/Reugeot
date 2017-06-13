@@ -21,9 +21,14 @@ class App
 
         $router = AppRouter::getInstance($url, $controllersPath, $adminControllersPath);
 
-        $router->get('/', function(){echo 'Home';}, false);
-        $router->get('/admin', function(){echo 'Admin';}, true);
-        $router->get('/404', function(){echo '404';}, false);
+        // Routes Pages
+        $router->get('/accueil', 'Home#index', false);
+
+        // Routes Redirigées
+        $router->get('/', 'Redirect#home', false);
+
+        // Routes Erreurs
+        $router->get('/404', 'Error#err404', false);
 
         $router->dispatch();
     }
