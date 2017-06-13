@@ -1,0 +1,9 @@
+# Reugeot Git Ignore File
+
+## JetBrains IDE
+
+.idea/
+
+## BuildIt Framework
+
+core/
