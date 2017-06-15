@@ -39,17 +39,25 @@
                 </div>
                 <!-- Navigation Content -->
                 <div id="navbar" class="navbar-collapse collapse">
-                    <!-- Sign In Form -->
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="email" placeholder="Email" class="form-control">
+                    <?php if (!isset($_SESSION['auth'])): ?>
+                        <!-- Sign In Form -->
+                        <form class="navbar-form navbar-right" method="POST" action="./connexion">
+                            <div class="form-group">
+                                <input name="email" type="email" placeholder="Email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input name="password" type="password" placeholder="Mot de Passe" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-success">Connexion</button>
+                            <a href="#" type="button" class="btn btn-primary">Inscription</a>
+                        </form>
+                    <?php else: ?>
+                        <!-- Account Actions -->
+                        <div class="navbar-right">
+                            <a href="#" class="btn navbar-btn btn-primary">Mon Compte</a>
+                            <a href="./deconnexion" class="btn navbar-btn btn-danger">Déconnexion</a>
                         </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Mot de Passe" class="form-control">
-                        </div>
-                        <button type="submit" class="btn btn-success">Connexion</button>
-                        <button type="button" class="btn btn-primary">Inscription</button>
-                    </form>
+                    <?php endif; ?>
                 </div><!--/.navbar-collapse -->
             </div>
         </nav>
