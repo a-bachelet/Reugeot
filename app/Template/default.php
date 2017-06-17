@@ -1,3 +1,4 @@
+<?php unset($_SESSION['flash']); ?>
 <!DOCTYPE html>
 <html>
 
@@ -85,6 +86,7 @@
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="checkbox">
                                         <label>
+                                            <input name="remember" type="hidden" value="'off'">
                                             <input name="remember" type="checkbox"> Se souvenir de moi
                                         </label>
                                     </div>
