@@ -53,6 +53,7 @@ $full_url = "${protocol}://${domain}${base_url}/";
  * Définition des chemins propres à toute l'application.
  */
 define('FOLDER_ROOT', dirname($base_dir));
+define('WEB_DOMAIN', $domain);
 define('WEB_ROOT', $full_url);
 
 /**
