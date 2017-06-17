@@ -1,6 +1,9 @@
 <?php
 
 namespace App;
+use App\Helper\RememberTokenHelper;
+use App\Model\User;
+use App\Repository\UserRepository;
 use App\Router\AppRouter;
 
 /**
@@ -10,11 +13,19 @@ use App\Router\AppRouter;
 class App
 {
     /**
-     * Fonction d'initialisation de l'application
+     * Fonction d'initialisation de l'application.
      */
     public static function init()
     {
-        // Implémentation du routeur.
+        // Auto Log de l'utilisateur si présence du token de type remember me
+        if (!isset($_SESSION['auth']) && isset($_COOKIE['remember'])) {
+            $valid = RememberTokenHelper::isTokenValid($_COOKIE['remember']);
+            if ($valid['valid']) {
+                RememberTokenHelper::reconnect($valid['user']);
+            }
+        }
+
+        // Implémentation du routeur
         $url = '/' . $_GET['url'];
         $controllersPath = 'App\\Controller\\';
         $adminControllersPath = 'App\\Controller\\Admin\\';
@@ -30,7 +41,6 @@ class App
 
         // Routes Administration
         $router->get('/dump', 'Dump#dump', true);
-        $router->post('/dump', 'Dump#dump', true);
 
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);
@@ -38,6 +48,7 @@ class App
         // Routes Erreurs
         $router->get('/404', 'Error#err404', false);
 
+        // Démarrage Routeur
         $router->dispatch();
     }
 }
