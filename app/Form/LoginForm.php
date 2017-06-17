@@ -19,5 +19,6 @@ class LoginForm extends Form
     {
         $this->add('email', [new NotBlankValidator(), new EmailValidator()]);
         $this->add('password', [new NotBlankValidator()]);
+        $this->add('remember', []);
     }
 }
