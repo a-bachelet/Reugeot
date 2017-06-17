@@ -10,6 +10,7 @@
         <meta name="author" content="Bachelet Alexis (app.bachelet@gmail.com)">
 
         <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./assets/css/bootflat.css">
 
         <style>
             body {
@@ -20,7 +21,10 @@
                 position: absolute;
                 top: 55px;
                 right: 0;
-                z-index: 999999;
+                z-index: 10;
+            }
+            .checkbox > label {
+                padding-left: 0;
             }
         </style>
 
@@ -119,6 +123,9 @@
 
         <script src="./assets/js/jquery.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/icheck.min.js"></script>
+        <script src="./assets/js/jquery.fs.selecter.min.js"></script>
+        <script src="./assets/js/jquery.fs.stepper.min.js"></script>
         <script src="./assets/js/app.js"></script>
 
     </body>
