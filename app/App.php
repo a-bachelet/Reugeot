@@ -28,6 +28,10 @@ class App
         $router->post('/connexion', 'Auth#login', false);
         $router->get('/deconnexion', 'Auth#logout', false);
 
+        // Routes Administration
+        $router->get('/dump', 'Dump#dump', true);
+        $router->post('/dump', 'Dump#dump', true);
+
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);
 
