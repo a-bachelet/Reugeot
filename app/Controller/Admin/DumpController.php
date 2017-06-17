@@ -19,6 +19,13 @@ class DumpController extends AppController
         $cookie = $_COOKIE;
         $get = $_GET;
         $post = $_POST;
-        $this->render('default', 'admin.dump', compact('session', 'cookie', 'get', 'post'));
+        $this->render('default', 'admin.dump', [
+            'page_name' => 'dump',
+            'page_title' => 'Reugeot - Dump',
+            'session' => $session,
+            'cookie' => $cookie,
+            'get' => $get,
+            'post' => $post
+        ]);
     }
 }
