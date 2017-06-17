@@ -1,4 +1,3 @@
-<?php unset($_SESSION['flash']); ?>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +16,12 @@
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
+            .flashes {
+                position: absolute;
+                top: 55px;
+                right: 0;
+                z-index: 999999;
+            }
         </style>
 
         <title><?= $params['page_title'] ?></title>
@@ -24,6 +29,16 @@
     </head>
 
     <body>
+
+        <!-- Flash Messages -->
+        <div class="flashes">
+            <?php foreach(\App\Helper\FlashMessageHelper::display() as $flash): ?>
+                <div class="alert alert-<?= $flash['type']; ?> alert-dismissible flash" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+                    <?= $flash['message']; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -104,6 +119,7 @@
 
         <script src="./assets/js/jquery.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/app.js"></script>
 
     </body>
 

@@ -27,7 +27,7 @@ class AuthController extends AppController
             $form->handleValues($_POST);
 
             if (!$form->isValid()) {
-                FlashMessageHelper::add('error', 'Identifiants incorrects.');
+                FlashMessageHelper::add('danger', 'Identifiants incorrects.');
                 RedirectController::redirect('home');
             }
 
@@ -37,12 +37,12 @@ class AuthController extends AppController
             $user = $repo->findBy(['email' => $_POST['email']])[0];
 
             if (empty($user)) {
-                FlashMessageHelper::add('error', 'Identifiants incorrects.');
+                FlashMessageHelper::add('danger', 'Identifiants incorrects.');
                 RedirectController::redirect('home');
             }
 
             if (sha1($_POST['password']) !== $user->getPassword()) {
-                FlashMessageHelper::add('error', 'Identifiants incorrects.');
+                FlashMessageHelper::add('danger', 'Identifiants incorrects.');
                 RedirectController::redirect('home');
             }
 
