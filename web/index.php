@@ -45,7 +45,7 @@ $domain = $_SERVER['SERVER_NAME'];
  * @var string $full_url
  * Url complète.
  */
-$full_url = "${protocol}://${domain}${base_url}/";
+$full_url = "${protocol}://${domain}${base_url}";
 
 /**
  * @var string FOLDER_ROOT
@@ -55,6 +55,7 @@ $full_url = "${protocol}://${domain}${base_url}/";
 define('FOLDER_ROOT', dirname($base_dir));
 define('WEB_DOMAIN', $domain);
 define('WEB_ROOT', $full_url);
+define('ASSETS', $full_url . '/assets');
 
 /**
  * @var array $autoload_array

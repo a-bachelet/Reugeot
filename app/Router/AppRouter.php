@@ -47,7 +47,7 @@ class AppRouter extends Router
      */
     public function notFoundCallable()
     {
-        header('Location: ./404');
+        header('Location: ' . WEB_ROOT . '/404');
         exit();
     }
 

@@ -40,7 +40,7 @@ class App
         $router->get('/deconnexion', 'Auth#logout', false);
 
         // Routes Administration
-        $router->get('/dump', 'Dump#dump', true);
+        $router->get('/admin/test', 'Test#test', true);
 
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);

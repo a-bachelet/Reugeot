@@ -9,8 +9,8 @@
         <meta name="description" content="Site Web de l'entreprise Reugeot">
         <meta name="author" content="Bachelet Alexis (app.bachelet@gmail.com)">
 
-        <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./assets/css/bootflat.css">
+        <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootflat.css">
 
         <style>
             body {
@@ -55,7 +55,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./accueil">Reugeot</a>
+                    <a class="navbar-brand" href="<?= WEB_ROOT; ?>/accueil">Reugeot</a>
                 </div>
                 <!-- Navigation Content -->
                 <div id="navbar" class="navbar-collapse collapse">
@@ -69,7 +69,7 @@
                         <!-- Logged account Actions -->
                         <div class="navbar-right">
                             <a href="#" class="btn navbar-btn btn-primary">Mon Compte</a>
-                            <a href="./deconnexion" class="btn navbar-btn btn-danger">Déconnexion</a>
+                            <a href="<?= WEB_ROOT; ?>/deconnexion" class="btn navbar-btn btn-danger">Déconnexion</a>
                         </div>
                     <?php endif; ?>
                 </div><!--/.navbar-collapse -->
@@ -88,7 +88,7 @@
                         <h4 class="modal-title">Connexion :</h4>
                     </div>
                     <div class="modal-body">
-                        <form id="loginForm" class="form-horizontal" method="POST" action="./connexion">
+                        <form id="loginForm" class="form-horizontal" method="POST" action="<?= WEB_ROOT; ?>/connexion">
                             <div class="form-group">
                                 <label for="email" class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-9">
@@ -121,12 +121,12 @@
             </div>
         </div>
 
-        <script src="./assets/js/jquery.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-        <script src="./assets/js/icheck.min.js"></script>
-        <script src="./assets/js/jquery.fs.selecter.min.js"></script>
-        <script src="./assets/js/jquery.fs.stepper.min.js"></script>
-        <script src="./assets/js/app.js"></script>
+        <script src="<?= ASSETS; ?>/js/jquery.min.js"></script>
+        <script src="<?= ASSETS; ?>/js/bootstrap.min.js"></script>
+        <script src="<?= ASSETS; ?>/js/icheck.min.js"></script>
+        <script src="<?= ASSETS; ?>/js/jquery.fs.selecter.min.js"></script>
+        <script src="<?= ASSETS; ?>/js/jquery.fs.stepper.min.js"></script>
+        <script src="<?= ASSETS; ?>/js/app.js"></script>
 
     </body>
 

@@ -8,24 +8,26 @@ use App\Controller\AppController;
  * Class DumpController
  * @package App\Controller\Admin
  */
-class DumpController extends AppController
+class TestController extends AppController
 {
     /**
-     * Fonction affichant les variables globales sous forme visuelle.
+     * Fonction permettant les tests durant le développement.
      */
-    public function dump()
+    public function test()
     {
         $session = $_SESSION;
         $cookie = $_COOKIE;
         $get = $_GET;
         $post = $_POST;
-        $this->render('default', 'admin.dump', [
+        $files = $_FILES;
+        $this->render('default', 'admin.test', [
             'page_name' => 'dump',
             'page_title' => 'Reugeot - Dump',
             'session' => $session,
             'cookie' => $cookie,
             'get' => $get,
-            'post' => $post
+            'post' => $post,
+            'files' => $files
         ]);
     }
 }

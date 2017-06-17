@@ -22,7 +22,7 @@ class RedirectController extends AppController
      */
     public function home()
     {
-        header('Location: ./accueil');
+        header('Location: ' . WEB_ROOT . '/accueil');
         exit(0);
     }
 }
