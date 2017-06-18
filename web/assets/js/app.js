@@ -40,7 +40,8 @@ $(document).ready(function() {
             progress_bar.html('');
             var img = $('#profile-thumbnail');
             var src = img.attr('src');
-            img.attr('src', src);
+            var date = new Date();
+            img.attr('src', src + '?time=' + date.getTime());
         }, false);
         ajax.addEventListener('error', function (event) {
             alert('Erreur lors du chagement du chargement de l\'image !');
@@ -60,7 +61,6 @@ $(document).ready(function() {
             var src = img.attr('src');
             img.attr('src', src);
         }, false);
-        alert(window.location.hostname);
         ajax.open('POST', 'http://' + window.location.hostname + window.location.pathname + '/profile-pic');
         ajax.send(formData);
     });
