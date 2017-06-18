@@ -17,11 +17,17 @@ $(document).ready(function() {
 
     // Fonctions qui affichent les noms des fichiers dans les inputs de type file.
     $('#profile_pic').on('change', function () {
-       $('#profile_pic_text').val(this.files[0].name);
+       if (this.files[0] && this.files[0].name) {
+           $('#profile_pic_text').val(this.files[0].name);
+       } else {
+           $('#profile_pic_text').val('');
+       }
     });
 
     // Gestion de l'upload de l'image de profil.
     $('#profilePicForm').on('submit', function (event) {
+        var responseDiv = $('#profile-pic-upload-response');
+        responseDiv.stop().hide();
         event.preventDefault();
         var file = document.forms['profilePicForm']['profile_pic'].files[0];
         var formData = new FormData();
@@ -38,6 +44,18 @@ $(document).ready(function() {
             progress_bar.attr('aria-valuenow', 0);
             progress_bar.css('width', 0 + '%');
             progress_bar.html('');
+            var response = JSON.parse(event.target.responseText);
+            responseDiv.addClass('alert');
+            if (response['error']) {
+                responseDiv.removeClass('alert-success');
+                responseDiv.addClass('alert-danger');
+            } else {
+                responseDiv.removeClass('alert-danger');
+                responseDiv.addClass('alert-success');
+            }
+            responseDiv.html(response['message']);
+            responseDiv.stop().slideDown();
+            setTimeout(function() {responseDiv.stop().slideUp()}, 3000);
             var img = $('#profile-thumbnail');
             var src = img.attr('src');
             var date = new Date();

@@ -38,6 +38,7 @@
                                     style="width: 0%;"
                             ></div>
                         </div>
+                        <div class="" id="profile-pic-upload-response"></div>
                         <button class="btn btn-primary" type="submit">Envoyer</button>
                     </form>
                 </div>
