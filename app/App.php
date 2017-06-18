@@ -39,6 +39,10 @@ class App
         $router->post('/connexion', 'Auth#login', false);
         $router->get('/deconnexion', 'Auth#logout', false);
 
+        // Routes Mon Compte
+        $router->get('/mon-compte', 'Account#index', false);
+        $router->post('/mon-compte/profile-pic', 'Account#uploadProfilePic', false);
+
         // Routes Administration
         $router->get('/admin/test', 'Test#test', true);
 

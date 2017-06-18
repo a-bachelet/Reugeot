@@ -68,7 +68,7 @@
                     <?php else: ?>
                         <!-- Logged account Actions -->
                         <div class="navbar-right">
-                            <a href="#" class="btn navbar-btn btn-primary">Mon Compte</a>
+                            <a href="<?= WEB_ROOT; ?>/mon-compte" class="btn navbar-btn btn-primary">Mon Compte</a>
                             <a href="<?= WEB_ROOT; ?>/deconnexion" class="btn navbar-btn btn-danger">Déconnexion</a>
                         </div>
                     <?php endif; ?>

@@ -102,6 +102,12 @@ class User extends Model
     private $company_website;
 
     /**
+     * Chemin vers l'image de profil de l'utilisateur.
+     * @var string $profile_pic
+     */
+    private $profile_pic;
+
+    /**
      * @return string
      */
     public function getFirstName()
@@ -271,11 +277,11 @@ class User extends Model
     }
 
     /**
-     * @param integer $professional
+     * @param string $professional
      */
     public function setProfessional($professional)
     {
-        $this->professional = $professional === 1 ? true : false;
+        $this->professional = $professional === '1' ? true : false;
     }
 
     /**
@@ -340,5 +346,21 @@ class User extends Model
     public function setCompanyWebsite($company_website)
     {
         $this->company_website = $company_website;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePic()
+    {
+        return $this->profile_pic;
+    }
+
+    /**
+     * @param string $profile_pic
+     */
+    public function setProfilePic($profile_pic)
+    {
+        $this->profile_pic = $profile_pic;
     }
 }

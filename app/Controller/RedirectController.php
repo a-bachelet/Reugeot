@@ -25,4 +25,13 @@ class RedirectController extends AppController
         header('Location: ' . WEB_ROOT . '/accueil');
         exit(0);
     }
+
+    /**
+     * Fonction appelée lors d'une redirection vers la page de déconnexion.
+     */
+    public function logout()
+    {
+        header('Location: ' . WEB_ROOT . '/deconnexion');
+        exit(0);
+    }
 }
