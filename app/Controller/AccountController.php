@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ChangePasswordForm;
 use App\Helper\FlashMessageHelper;
 use App\Helper\IsAuthenticatedHelper;
 use App\Model\User;
@@ -69,5 +70,23 @@ class AccountController extends AppController
 
         echo utf8_encode(json_encode($return));
         exit();
+    }
+
+    public function changePassword()
+    {
+        IsAuthenticatedHelper::verifyAuth();
+
+        foreach ($_POST as $k => $v) {
+            $_POST[$k] = htmlspecialchars($v);
+        }
+
+        $form = new ChangePasswordForm();
+        $form->handleValues($_POST);
+
+        if ($form->isValid()) {
+
+        } else {
+            
+        }
     }
 }

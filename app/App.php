@@ -42,6 +42,7 @@ class App
         // Routes Mon Compte
         $router->get('/mon-compte', 'Account#index', false);
         $router->post('/mon-compte/profile-pic', 'Account#uploadProfilePic', false);
+        $router->post('/mon-compte/change-mot-de-passe', 'Account#changePassword', false);
 
         // Routes Administration
         $router->get('/admin/test', 'Test#test', true);

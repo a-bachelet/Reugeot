@@ -140,7 +140,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h4>Changement de Mot de Passe :</h4>
-                    <form id="personalForm" class="form-horizontal" method="POST" action="<?= WEB_ROOT; ?>/mon-compte">
+                    <form id="personalForm" class="form-horizontal" method="POST" action="<?= WEB_ROOT; ?>/mon-compte/change-mot-de-passe">
                         <div class="form-group">
                             <label for="password" class="col-sm-3 control-label">Mot de Passe Actuel</label>
                             <div class="col-sm-9">
