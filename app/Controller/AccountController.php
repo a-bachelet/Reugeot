@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Helper\FlashMessageHelper;
+use App\Helper\IsAuthenticatedHelper;
 use App\Model\User;
 use App\Repository\UserRepository;
 
@@ -10,7 +11,7 @@ class AccountController extends AppController
 {
     public function index()
     {
-        $this->authVerify();
+        IsAuthenticatedHelper::verifyAuth();
 
         $userRepo = new UserRepository();
         /** @var User $user **/
@@ -27,16 +28,7 @@ class AccountController extends AppController
         ]);
     }
 
-    public function uploadProfilePic() {
-
-    }
-
-    private function authVerify() {
-        if (isset($_SESSION['auth']) && isset($_SESSION['auth']['id'])) {
-
-        } else {
-            FlashMessageHelper::add('danger', 'Vous devez être connecté pour accéder à cette page.');
-            RedirectController::redirect('home');
-        }
+    public function uploadProfilePic()
+    {
     }
 }
