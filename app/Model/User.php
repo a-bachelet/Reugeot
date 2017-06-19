@@ -36,6 +36,12 @@ class User extends Model
     private $password;
 
     /**
+     * Token d'activation de l'utilisateur.
+     * @var string $activation_token
+     */
+    private $activation_token;
+
+    /**
      * Role de l'utilisateur.
      * @var Role $role;
      */
@@ -169,6 +175,22 @@ class User extends Model
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getActivationToken()
+    {
+        return $this->activation_token;
+    }
+
+    /**
+     * @param string $activation_token
+     */
+    public function setActivationToken($activation_token)
+    {
+        $this->activation_token = $activation_token;
     }
 
     /**

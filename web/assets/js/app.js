@@ -83,4 +83,7 @@ $(document).ready(function() {
         ajax.send(formData);
     });
 
+    // Formulaire d'inscription (checkbox)
+    
+
 });

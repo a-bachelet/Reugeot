@@ -31,6 +31,11 @@ class AccountController extends AppController
         ]);
     }
 
+    public function subscribe()
+    {
+        
+    }
+
     public function uploadProfilePic()
     {
         IsAuthenticatedHelper::verifyAuth();

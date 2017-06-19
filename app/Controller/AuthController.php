@@ -46,6 +46,11 @@ class AuthController extends AppController
                 RedirectController::redirect('home');
             }
 
+            if ($user->getActivationToken() !== '') {
+                FlashMessageHelper::add('warning', 'Votre compte n\'est pas activé. Vérifiez vos mails !');
+                RedirectController::redirect('home');
+            }
+
             $_SESSION['auth'] = [
                 'id' => $user->getId(),
                 'first_name' => $user->getFirstName(),
