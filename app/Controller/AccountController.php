@@ -22,7 +22,7 @@ class AccountController extends AppController
             RedirectController::redirect('logout');
         }
 
-        $this->render('default', 'account.index', [
+        $this->render('default', 'account.index.index', [
             'page_name' => 'account-index',
             'page_title' => 'Reugeot - Mon Compte',
             'user' => $user
