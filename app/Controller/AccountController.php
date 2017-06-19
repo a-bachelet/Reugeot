@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Database\AppDatabase;
 use App\Form\ChangePasswordForm;
 use App\Helper\FlashMessageHelper;
+use App\Helper\FormErrorHelper;
 use App\Helper\IsAuthenticatedHelper;
 use App\Model\User;
 use App\Repository\UserRepository;
@@ -85,8 +87,36 @@ class AccountController extends AppController
 
         if ($form->isValid()) {
 
+            $userRepo = new UserRepository();
+            /** @var User $user **/
+            $user = $userRepo->find($_SESSION['auth']['id']);
+
+            $errors = [];
+
+            if ($user->getPassword() === sha1($_POST['password'])) {
+                if ($_POST['new_password'] === $_POST['new_password_repeat']) {
+                    $password = sha1($_POST['new_password']);
+                    $query = ('UPDATE users SET password = :password WHERE id = :id');
+                    $db = AppDatabase::getInstance();
+                    $db->query($query, false, ['id' => $user->getId(), 'password' => $password]);
+                    FlashMessageHelper::add('success', 'Votre mot de passe a bien été modifié !');
+                } else {
+                    $errors = [
+                        'new_password' => ['', 'Les deux mots de passe ne correspondent pas !'],
+                        'new_password_repeat' => ['', 'Les deux mots de passe ne correspondent pas !']
+                    ];
+                    FormErrorHelper::add('passwordForm', $errors);
+                    RedirectController::redirect('account');
+                }
+            } else {
+                $errors = ['password' => ['', 'Votre mot de passe est incorrect.']];
+            }
+            FormErrorHelper::add('passwordForm', $errors);
+            RedirectController::redirect('account');
+
         } else {
-            
+            FormErrorHelper::add('passwordForm', $form->getErrors());
+            RedirectController::redirect('account');
         }
     }
 }

@@ -13,11 +13,21 @@ class FormErrorHelper
         $_SESSION['form_errors'][$formId] = $errors;
     }
 
+    public static function hasError($formId) {
+        if (isset($_SESSION['form_errors'])) {
+            return isset($_SESSION['form_errors'][$formId]);
+        } else {
+            return false;
+        }
+    }
+
     public static function display($formId)
     {
         if (isset($_SESSION['form_errors'])) {
-            if (isset($_SESSION['form_errors'][$formId])) {
-                return $_SESSION['form_errors'][$formId];
+            $errors = $_SESSION['form_errors'];
+            unset($_SESSION['form_errors']);
+            if (isset($errors[$formId])) {
+                return $errors[$formId];
             } else {
                 return [];
             }

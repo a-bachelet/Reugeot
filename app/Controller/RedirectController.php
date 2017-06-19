@@ -34,4 +34,13 @@ class RedirectController extends AppController
         header('Location: ' . WEB_ROOT . '/deconnexion');
         exit(0);
     }
+
+    /**
+     * Fonction appelée lors d'une redirection vers la page Mon compte.
+     */
+    public function account()
+    {
+        header('Location: ' . WEB_ROOT . '/mon-compte');
+        exit(0);
+    }
 }
