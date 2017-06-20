@@ -124,6 +124,45 @@ class AuthController extends AppController
     }
 
     /**
+     * Fonction appelée lors de l'activation d'un compte.
+     **/
+    public function activate() {
+        if (isset($_GET['token'])) {
+            $_GET['token'] = htmlspecialchars($_GET['token']);
+
+            $userRepo = new UserRepository();
+            /** @var User $user **/
+            $user = $userRepo->findBy(['activation_token' => $_GET['token']])[0];
+
+            if (!empty($user)) {
+                try {
+                    $db = AppDatabase::getInstance();
+                    $query = "UPDATE users SET activation_token = '' WHERE activation_token = :activation_token";
+                    $db->query($query, false, ['activation_token' => $_GET['token']]);
+
+                    $_SESSION['auth'] = [
+                        'id' => $user->getId(),
+                        'first_name' => $user->getFirstName(),
+                        'last_name' => $user->getLastName(),
+                        'email' => $user->getEmail(),
+                        'role' => $user->getRole()->getName(),
+                        'professional' => $user->isProfessional()
+                    ];
+
+                    FlashMessageHelper::add('success', 'Votre compte a bien été activé. Vous êtes désormais connecté.');
+                    RedirectController::redirect('home');
+
+                } catch (\Exception $e) {
+
+                }
+            }
+        }
+
+        FlashMessageHelper::add('danger', 'Le token d\'activation est erroné !');
+        RedirectController::redirect('home');
+    }
+
+    /**
      * Fonction appelée lors d'une tentative de connexion.
      */
     public function login()

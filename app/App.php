@@ -37,6 +37,7 @@ class App
 
         // Routes Authentification
         $router->post('/inscription', 'Auth#register', false);
+        $router->get('/activation', 'Auth#activate', false);
         $router->post('/connexion', 'Auth#login', false);
         $router->get('/deconnexion', 'Auth#logout', false);
 
@@ -44,6 +45,7 @@ class App
         $router->get('/mon-compte', 'Account#index', false);
         $router->post('/mon-compte/profile-pic', 'Account#uploadProfilePic', false);
         $router->post('/mon-compte/change-mot-de-passe', 'Account#changePassword', false);
+        $router->post('/mon-compte/change-informations', 'Account#changeInfos', false);
 
         // Routes Administration
         $router->get('/admin/test', 'Test#test', true);

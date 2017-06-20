@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Database\AppDatabase;
 use App\Form\ChangePasswordForm;
+use App\Form\InformationForm;
+use App\Form\InformationProfessionalForm;
 use App\Helper\FlashMessageHelper;
 use App\Helper\FormErrorHelper;
 use App\Helper\IsAuthenticatedHelper;
@@ -29,11 +31,6 @@ class AccountController extends AppController
             'page_title' => 'Reugeot - Mon Compte',
             'user' => $user
         ]);
-    }
-
-    public function subscribe()
-    {
-        
     }
 
     public function uploadProfilePic()
@@ -121,6 +118,85 @@ class AccountController extends AppController
 
         } else {
             FormErrorHelper::add('passwordForm', $form->getErrors());
+            RedirectController::redirect('account');
+        }
+    }
+
+    public function changeInfos()
+    {
+        IsAuthenticatedHelper::verifyAuth();
+
+        foreach ($_POST as $k => $v) {
+            $_POST[$k] = htmlspecialchars($v);
+        }
+
+        $userRepo = new UserRepository();
+        /** @var User $user **/
+        $user = $userRepo->find($_SESSION['auth']['id']);
+
+        $professional = null;
+        $form = null;
+
+        if ($user->isProfessional()) {
+            $form = new InformationProfessionalForm();
+            $_POST['professional'] = 1;
+        } else {
+            $form = new InformationForm();
+            $_POST['professional'] = 0;
+        }
+
+        $form->handleValues($_POST);
+
+        if ($form->isValid()) {
+            if (isset($_POST['home_phone']) && $_POST['home_phone'] !== '' && strlen($_POST['home_phone']) > 0 && strlen($_POST['home_phone']) < 10) {
+                $errors = ['home_phone' => ['', 'Ce numéro de téléphone est incorrect']];
+                FormErrorHelper::add('personalInformationForm', $errors);
+                RedirectController::redirect('account');
+            } else {
+                if (isset($_POST['cell_phone']) && $_POST['cell_phone'] !== '' && strlen($_POST['cell_phone']) > 0 && strlen($_POST['cell_phone']) < 10) {
+                    $errors = ['cell_phone' => ['', 'Ce numéro de téléphone est incorrect']];
+                    FormErrorHelper::add('personalInformationForm', $errors);
+                    RedirectController::redirect('account');
+                } else {
+                    if (isset($_POST['company_phone']) && $_POST['company_phone'] !== '' && strlen($_POST['company_phone']) > 0 && strlen($_POST['company_phone']) < 10) {
+                        $errors = ['company_phone' => ['', 'Ce numéro de téléphone est incorrect']];
+                        FormErrorHelper::add('personalInformationForm', $errors);
+                        RedirectController::redirect('account');
+                    } else {
+                        $query = 'UPDATE users SET ';
+                        $indexes = array_values($_POST);
+                        foreach($_POST as $k => $v) {
+                            if ($_POST[$k] === $indexes[count($_POST) - 1]) {
+                                $query .= "$k = :$k ";
+                            } else {
+                                $query .= "$k = :$k, ";
+                            }
+                        }
+                        $query .= 'WHERE id = :id';
+
+                        try {
+                            $db = AppDatabase::getInstance();
+                            $db->query($query, false, array_merge($_POST, ['id' => $user->getId()]));
+                            $user = $userRepo->find($user->getId());
+                            $_SESSION['auth'] = [
+                                'id' => $user->getId(),
+                                'first_name' => $user->getFirstName(),
+                                'last_name' => $user->getLastName(),
+                                'email' => $user->getEmail(),
+                                'role' => $user->getRole()->getName(),
+                                'professional' => $user->isProfessional()
+                            ];
+                            FlashMessageHelper::add('success', 'Vos informations ont été mises à jour.');
+                            RedirectController::redirect('account');
+                        } catch (\Exception $e) {
+                            FlashMessageHelper::add('danger', 'Une erreur est survenue durant la mise à jour de votre profil.');
+                            RedirectController::redirect('account');
+                        }
+                    }
+                }
+            }
+        } else {
+            FormErrorHelper::add('personalInformationForm', $form->getErrors());
             RedirectController::redirect('account');
         }
     }

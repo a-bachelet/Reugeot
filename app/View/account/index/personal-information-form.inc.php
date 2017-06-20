@@ -54,9 +54,9 @@
 
     <!-- Zip Code field -->
     <div class="form-group">
-        <label for="zipcode" class="col-sm-3 control-label">Code Postal</label>
+        <label for="zip_code" class="col-sm-3 control-label">Code Postal</label>
         <div class="col-sm-9">
-            <input name="zipcode" type="text" class="form-control" id="zipcode" value="<?= $params['user']->getZipcode(); ?>">
+            <input name="zip_code" type="text" class="form-control" id="zip_code" value="<?= $params['user']->getZipcode(); ?>">
         </div>
     </div>
 
