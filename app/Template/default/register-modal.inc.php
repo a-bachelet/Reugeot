@@ -77,9 +77,9 @@
 
                     <!-- Zip Code field -->
                     <div class="form-group">
-                        <label for="zipcode" class="col-sm-3 control-label">Code Postal</label>
+                        <label for="zip_code" class="col-sm-3 control-label">Code Postal</label>
                         <div class="col-sm-9">
-                            <input name="zipcode" type="text" maxlength="5" class="form-control" id="zipcode" placeholder="">
+                            <input name="zip_code" type="text" maxlength="5" class="form-control" id="zip_code" placeholder="">
                         </div>
                     </div>
 
@@ -139,7 +139,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" form="loginForm">Envoyer</button>
+                <button type="submit" class="btn btn-primary" form="registerForm">Envoyer</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
             </div>
         </div>
