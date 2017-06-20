@@ -36,6 +36,7 @@ class App
         $router->get('/accueil', 'Home#index', false);
 
         // Routes Authentification
+        $router->post('/inscription', 'Auth#register', false);
         $router->post('/connexion', 'Auth#login', false);
         $router->get('/deconnexion', 'Auth#logout', false);
 

@@ -104,7 +104,7 @@
                     </div>
 
                     <!-- Company Name field -->
-                    <div class="form-group company_fg hidden">
+                    <div class="form-group company_fg">
                         <label for="company_name" class="col-sm-3 control-label">Nom de la Société</label>
                         <div class="col-sm-9">
                             <input name="company_name" type="text" class="form-control" id="company_name" placeholder="">
@@ -112,7 +112,7 @@
                     </div>
 
                     <!-- Company Phone field -->
-                    <div class="form-group company_fg hidden">
+                    <div class="form-group company_fg">
                         <label for="company_phone" class="col-sm-3 control-label">Tel de la Société</label>
                         <div class="col-sm-9">
                             <input name="company_phone" type="text" maxlength="10" class="form-control" id="company_phone" placeholder="">
@@ -120,7 +120,7 @@
                     </div>
 
                     <!-- Company Website field -->
-                    <div class="form-group company_fg hidden">
+                    <div class="form-group company_fg">
                         <label for="company_website" class="col-sm-3 control-label">Site WEB de la Société</label>
                         <div class="col-sm-9">
                             <input name="company_website" type="text" class="form-control" id="company_website" placeholder="">
@@ -128,7 +128,7 @@
                     </div>
 
                     <!-- Company Email field -->
-                    <div class="form-group company_fg hidden">
+                    <div class="form-group company_fg">
                         <label for="company_email" class="col-sm-3 control-label">Email de la Société</label>
                         <div class="col-sm-9">
                             <input name="company_email" type="email" class="form-control" id="company_email" placeholder="">

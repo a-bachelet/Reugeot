@@ -84,6 +84,17 @@ $(document).ready(function() {
     });
 
     // Formulaire d'inscription (checkbox)
+    var professional = $('#professional');
+    var company_fgs = $('.company_fg');
+    company_fgs.stop().slideUp();
+    professional.on('ifChecked', function (event) {
+        company_fgs.stop().slideDown();
+    });
+    professional.on('ifUnchecked', function (event) {
+       company_fgs.stop().slideUp(function () {
+           $('.company_fg :input').val('');
+       });
+    });
     
 
 });
