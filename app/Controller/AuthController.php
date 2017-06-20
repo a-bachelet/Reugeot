@@ -74,7 +74,7 @@ class AuthController extends AppController
                     $company_email = $_POST['company_email'];
                 }
 
-                $query = "INSERT INTO users (first_name, last_name, email, password, activation_token, role_id, home_phone, cell_phone, address, zip_code, city, professional, company_name, company_phone, company_website, company_email, profile_pic) VALUES (:first_name, :last_name, :email, :password, :activation_token, :role_id, :home_phone, :cell_phone, :address, :zipcode, :city, :professional :company_name, :company_phone, :company_website, :company_email, :profile_pic)";
+                $query = "INSERT INTO users (first_name, last_name, email, password, activation_token, role_id, home_phone, cell_phone, address, zip_code, city, professional, company_name, company_phone, company_website, company_email, profile_pic) VALUES (:first_name, :last_name, :email, :password, :activation_token, :role_id, :home_phone, :cell_phone, :address, :zip_code, :city, :professional, :company_name, :company_phone, :company_website, :company_email, :profile_pic)";
 
                 $db = AppDatabase::getInstance();
 
@@ -85,13 +85,13 @@ class AuthController extends AppController
                         'email' => $email,
                         'password' => $password,
                         'activation_token' => $activation_token,
-                        'role_id' => $role_id,
+                        'role_id' => intval($role_id),
                         'home_phone' => $home_phone,
                         'cell_phone' => $cell_phone,
                         'address' => $address,
                         'zip_code' => $zip_code,
                         'city' => $city,
-                        'professional' => $professional,
+                        'professional' => intval($professional),
                         'company_name' => $company_name,
                         'company_phone' => $company_phone,
                         'company_website' => $company_website,
@@ -99,7 +99,13 @@ class AuthController extends AppController
                         'profile_pic' => ''
                     ]);
 
-                    mail($email, 'Inscription - Reugeot', 'Merci de vous être inscrit sur notre site web, veuillez cliquer sur ce lien pour activer votre compte : ' . WEB_ROOT . '/activation?token=' . $activation_token);
+                    $mail_content = "
+                        <h1>Confirmation d'inscription sur le site web de Reugeot.</h1>
+                        <p>Nous vous remercions pour cette inscription et espérons que notre site vous plaise.</p>
+                        <p>Pour confirmer votre inscription veuillez cliquer <a href='" . WEB_ROOT . "/activation?token=$activation_token" . "'>ici</a>.</p>
+                    ";
+
+                    mail($email, 'Reugeot - Confirmation d\'inscription', utf8_decode($mail_content));
 
                     FlashMessageHelper::add('success', 'Votre inscription s\'est bien déroulée, merci de vérifier vos emails afin d\'activer votre compte.');
                     RedirectController::redirect('home');
