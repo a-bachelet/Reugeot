@@ -48,7 +48,7 @@ class App
         $router->post('/mon-compte/change-informations', 'Account#changeInfos', false);
 
         // Routes Administration
-        $router->get('/admin/test', 'Test#test', true);
+        $router->get('/administration', 'Home#index', true);
 
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);
