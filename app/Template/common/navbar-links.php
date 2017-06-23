@@ -3,7 +3,7 @@
 
     <?php if (\App\Helper\IsUserAdminHelper::isUserAdmin()): ?>
         <li>
-            <a href="<?= WEB_ROOT ?>/administration">Administration</a>
+            <a href="<?= WEB_ROOT ?>/administration"><span class="glyphicon glyphicon-cog"></span> Administration</a>
         </li>
     <?php endif; ?>
 
