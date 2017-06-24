@@ -99,6 +99,11 @@ class AuthController extends AppController
                         'profile_pic' => ''
                     ]);
 
+                    $id = intval($db->getLastInsertedId());
+
+                    $query = "UPDATE users SET profile_pic = :profile_pic WHERE id = :id";
+                    $db->query($query, false, ['id' => $id, 'profile_pic' => '/uploads/profile_pics/' . $id . '.jpg']);
+
                     $mail_content = "
                         <h1>Confirmation d'inscription sur le site web de Reugeot.</h1>
                         <p>Nous vous remercions pour cette inscription et espérons que notre site vous plaise.</p>
