@@ -82,6 +82,9 @@
                 <a href="<?= WEB_ROOT . '/administration/utilisateurs' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminUser') !== false) {echo 'active';} ?>">
                     <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs
                 </a>
+                <a href="<?= WEB_ROOT . '/administration/vehicules' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicle') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules
+                </a>
             </div>
         </div>
 
