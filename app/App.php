@@ -2,8 +2,6 @@
 
 namespace App;
 use App\Helper\RememberTokenHelper;
-use App\Model\User;
-use App\Repository\UserRepository;
 use App\Router\AppRouter;
 
 /**
@@ -48,7 +46,14 @@ class App
         $router->post('/mon-compte/change-informations', 'Account#changeInfos', false);
 
         // Routes Administration
-        $router->get('/administration', 'Home#index', true);
+
+            // Acceuil
+            $router->get('/administration', 'Home#index', true);
+
+            // Utilisateurs
+            $router->get('/administration/utilisateurs', 'User#index', true);
+            $router->get('/administration/utilisateurs/:id', 'User#details', true)->param('id', '[0-9]+');
+            $router->get('/administration/utilisateurs/:id/supprimer', 'User#delete', true)->param('id', '[0-9]+');
 
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);

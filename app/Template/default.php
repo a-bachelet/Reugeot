@@ -13,19 +13,7 @@
         <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootflat.css">
 
         <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-            .flashes {
-                position: absolute;
-                top: 55px;
-                right: 5px;
-                z-index: 10;
-            }
-            .checkbox > label {
-                padding-left: 0;
-            }
+            <?php require('common/style.css'); ?>
         </style>
 
         <title><?= $params['page_title'] ?></title>

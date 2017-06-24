@@ -10,7 +10,7 @@ class HomeController extends AppController
     {
         $this->render('admin', 'admin.home.index', [
             'page_name' => 'adminHomeIndex',
-            'page_title' => 'Reugeot - Accueil Administration'
+            'page_title' => 'Administration - Accueil'
         ]);
     }
 }

@@ -43,4 +43,9 @@ class RedirectController extends AppController
         header('Location: ' . WEB_ROOT . '/mon-compte');
         exit(0);
     }
+
+    public function adminUser() {
+        header('Location: ' . WEB_ROOT . '/administration/utilisateurs');
+        exit(0);
+    }
 }

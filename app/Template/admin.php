@@ -13,19 +13,7 @@
     <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootflat.css">
 
     <style>
-        body {
-            padding-top: 50px;
-            padding-bottom: 20px;
-        }
-        .flashes {
-            position: absolute;
-            top: 55px;
-            right: 5px;
-            z-index: 10;
-        }
-        .checkbox > label {
-            padding-left: 0;
-        }
+        <?php require('common/style.css'); ?>
     </style>
 
     <title><?= $params['page_title'] ?></title>
@@ -86,15 +74,18 @@
 
     <div class="row">
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <div class="list-group">
                 <a href="<?= WEB_ROOT . '/administration' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminHome') !== false) {echo 'active';} ?>">
-                    <span class="glyphicon glyphicon-cog"></span> Accueil
+                    <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;&nbsp;Accueil
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/utilisateurs' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminUser') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs
                 </a>
             </div>
         </div>
 
-        <div class="col-md-9">
+        <div class="col-md-10">
             <?= $content ?>
         </div>
 
