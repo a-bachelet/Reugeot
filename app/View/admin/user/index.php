@@ -7,7 +7,7 @@
             <!-- Panel Header -->
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs</h3>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                                 <li><a href="<?= WEB_ROOT . '/administration/utilisateurs?page=' . ($params['viewedPage'] - 2) ?>"><</a></li>
                                 <li><a href="<?= WEB_ROOT . '/administration/utilisateurs?page=' . ($params['viewedPage'] - 1) ?>"><?= $params['viewedPage'] - 1 ?></a></li>
                             <?php endif; ?>
-                            <li class="active"><a href="<?= WEB_ROOT . '/administration/utilisateurs?page=' . $params['viewedPage'] ?>"><?= $params['viewedPage'] ?></a></li>
+                            <li class="active"><span><?= $params['viewedPage'] ?></span></li>
                             <?php if ($params['viewedPage'] + 1 <= $params['pageCount']): ?>
                                 <li><a href="<?= WEB_ROOT . '/administration/utilisateurs?page=' . ($params['viewedPage'] + 1) ?>"><?= $params['viewedPage'] + 1 ?></a></li>
                                 <li><a href="<?= WEB_ROOT . '/administration/utilisateurs?page=' . ($params['viewedPage'] + 2) ?>">></a></li>
@@ -96,14 +96,6 @@
                             <?php endif; ?>
 
                         </ul>
-
-                        <!--
-                        <ul class="pagination hidden-xs pull-right">
-                            <?php for ($i = 0; $i < $params['pageCount']; $i++): ?>
-                                <li class="<?php if ($i+1 === $params['viewedPage']) {echo 'active';} ?>"><a href="<?= WEB_ROOT . '/administration/utilisateurs?page=' . ($i+1) ?>"><?= ($i+1) ?></a></li>
-                            <?php endfor; ?>
-                        </ul>
-                        -->
 
                         <ul class="pagination visible-xs pull-right">
                             <?php if($params['viewedPage'] !== 1): ?>

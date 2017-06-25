@@ -58,8 +58,8 @@ class App
             // Véhicules
             $router->get('/administration/vehicules', 'Vehicle#index', true);
             $router->get('/administration/vehicules/:id', 'Vehicle#details', true)->param('id', '[0-9]+');
-            $router->get('/administration/vehicules/ajouter', 'Vehicule#addGet', true);
-            $router->post('/administration/vehicules/ajouter', 'Vehicule#addPost', true);
+            $router->get('/administration/vehicules/ajouter', 'Vehicle#addGet', true);
+            $router->post('/administration/vehicules/ajouter', 'Vehicle#addPost', true);
             $router->get('/administration/vehicules/:id/editer','Vehicle#editGet', true)->param('id', '[0-9]+');
             $router->post('/administration/vehicules/:id/editer', 'Vehicle#editPost', true)->param('id', '[0-9]+');
             $router->get('/administration/vehicules/:id/supprimer', 'Vehicle#delete', true)->param('id', '[0-9]+');
