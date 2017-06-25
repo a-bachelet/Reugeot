@@ -1,3 +1,13 @@
+<?php
+    $userRepo = new \App\Repository\UserRepository();
+    $userCount = $userRepo->count();
+    $vehicleRepo = new \App\Repository\VehicleRepository();
+    $vehicleCount = $vehicleRepo->count();
+    $vehicleCategoryRepo = new \App\Repository\VehicleCategoryRepository();
+    $vehicleCategoryCount = $vehicleCategoryRepo->count();
+    $vehicleBrandRepo = new \App\Repository\VehicleBrandRepository();
+    $vehicleBrandCount = $vehicleBrandRepo->count();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -80,16 +90,16 @@
                     <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;&nbsp;Accueil
                 </a>
                 <a href="<?= WEB_ROOT . '/administration/utilisateurs' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminUser') !== false) {echo 'active';} ?>">
-                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs <span class="badge"><?= $userCount; ?></span>
                 </a>
                 <a href="<?= WEB_ROOT . '/administration/vehicules' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicle') !== false && strpos($params['page_name'], 'adminVehicleCategory') === false && strpos($params['page_name'], 'adminVehicleBrand') === false) {echo 'active';} ?>">
-                    <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules
+                    <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules <span class="badge"><?= $vehicleCount; ?></span>
                 </a>
                 <a href="<?= WEB_ROOT . '/administration/vehicules-categories' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicleCategory') !== false) {echo 'active';} ?>">
-                    <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Catégories
+                    <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Catégories  <span class="badge"><?= $vehicleCategoryCount; ?></span>
                 </a>
                 <a href="<?= WEB_ROOT . '/administration/vehicules-marques' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicleBrand') !== false) {echo 'active';} ?>">
-                    <span class="glyphicon glyphicon-registration-mark"></span>&nbsp;&nbsp;&nbsp;Marques
+                    <span class="glyphicon glyphicon-registration-mark"></span>&nbsp;&nbsp;&nbsp;Marques  <span class="badge"><?= $vehicleBrandCount; ?></span>
                 </a>
             </div>
         </div>
