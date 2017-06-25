@@ -53,7 +53,7 @@
                             <td><?= $vehicle->isActive() ? 'Oui' : 'Non' ?></td>
                             <td align="center">
                                 <a href="<?= WEB_ROOT . '/administration/vehicules/' . $vehicle->getId(); ?>" class="btn btn-primary btn-sm">Détails</a>
-                                <a href="<?= WEB_ROOT . '/administration/vehicules/' . $vehicle->getId() . '/modifier'; ?>" class="btn btn-warning btn-sm">Modifier</a>
+                                <a href="<?= WEB_ROOT . '/administration/vehicules/' . $vehicle->getId() . '/editer'; ?>" class="btn btn-warning btn-sm">Editer</a>
                                 <a href="<?= WEB_ROOT . '/administration/vehicules/' . $vehicle->getId() . '/supprimer'; ?>" class="btn btn-danger btn-sm">Supprimer</a>
                             </td>
                         </tr>

@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use App\Controller\RedirectController;
+use App\Helper\FlashMessageHelper;
 use App\Model\Vehicle;
 use App\Repository\VehicleRepository;
 
@@ -34,10 +36,19 @@ class VehicleController extends AppController
 
     public function details($id)
     {
-        $this->render('admin', 'admin.vehicle.details', [
-            'page_name' => 'adminVehicleDetails',
-            'page_title' => 'Administration - Véhicules'
-        ]);
+        $vehicleRepo = new VehicleRepository();
+        /** @var Vehicle $vehicle **/
+        $vehicle = $vehicleRepo->find($id);
+        if (is_null($vehicle->getId())) {
+            FlashMessageHelper::add('danger', 'Ce véhicule n\'existe pas.');
+            RedirectController::redirect('adminVehicle');
+        } else {
+            $this->render('admin', 'admin.vehicle.details', [
+                'page_name' => 'adminVehicleDetails',
+                'page_title' => 'Administration - Véhicules',
+                'vehicle' => $vehicle
+            ]);
+        }
     }
 
     public function addGet()

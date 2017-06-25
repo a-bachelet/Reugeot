@@ -48,4 +48,10 @@ class RedirectController extends AppController
         header('Location: ' . WEB_ROOT . '/administration/utilisateurs');
         exit(0);
     }
+
+    public function adminVehicle()
+    {
+        header('Location: ' . WEB_ROOT . '/administration/vehicules');
+        exit(0);
+    }
 }
