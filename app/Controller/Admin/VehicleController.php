@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 use App\Controller\RedirectController;
+use App\Database\AppDatabase;
 use App\Helper\FlashMessageHelper;
 use App\Model\Vehicle;
 use App\Repository\VehicleRepository;
@@ -79,6 +80,25 @@ class VehicleController extends AppController
 
     public function delete($id)
     {
+        $vehicleRepo = new VehicleRepository();
+        /** @var Vehicle $vehicle **/
+        $vehicle = $vehicleRepo->find($id);
 
+        if (is_null($vehicle->getId())) {
+            FlashMessageHelper::add('danger', 'Ce véhicule n\'existe pas.');
+            RedirectController::redirect('adminVehicle');
+        }
+
+        $query = 'DELETE FROM vehicles WHERE id = :id';
+        $db = AppDatabase::getInstance();
+
+        try {
+            $db->query($query, false, ['id' => $vehicle->getId()]);
+            FlashMessageHelper::add('success', 'Le véhicule ' . $vehicle->getId() . ' a bien été supprimé.');
+            RedirectController::redirect('adminVehicle');
+        } catch (\PDOException $e) {
+            FlashMessageHelper::add('danger', 'Une erreur est survenue lors de la suppression.');
+            RedirectController::redirect('adminVehicle');
+        }
     }
 }

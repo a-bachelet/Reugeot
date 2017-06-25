@@ -82,8 +82,14 @@
                 <a href="<?= WEB_ROOT . '/administration/utilisateurs' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminUser') !== false) {echo 'active';} ?>">
                     <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs
                 </a>
-                <a href="<?= WEB_ROOT . '/administration/vehicules' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicle') !== false) {echo 'active';} ?>">
+                <a href="<?= WEB_ROOT . '/administration/vehicules' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicle') !== false && strpos($params['page_name'], 'adminVehicleCategory') === false && strpos($params['page_name'], 'adminVehicleBrand') === false) {echo 'active';} ?>">
                     <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/vehicules-categories' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicleCategory') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Catégories
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/vehicules-marques' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicleBrand') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-registration-mark"></span>&nbsp;&nbsp;&nbsp;Marques
                 </a>
             </div>
         </div>

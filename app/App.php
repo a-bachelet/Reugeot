@@ -64,6 +64,22 @@ class App
             $router->post('/administration/vehicules/:id/editer', 'Vehicle#editPost', true)->param('id', '[0-9]+');
             $router->get('/administration/vehicules/:id/supprimer', 'Vehicle#delete', true)->param('id', '[0-9]+');
 
+            // Véhicules Catégories
+            $router->get('/administration/vehicules-categories', 'VehicleCategory#index', true);
+            $router->get('/administration/vehicules-categories/ajouter', 'VehicleCategory#addGet', true);
+            $router->post('/administration/vehicules-categories/ajouter', 'VehicleCategory#addPost', true);
+            $router->get('/administration/vehicules-categories/:id/editer','VehicleCategory#editGet', true)->param('id', '[0-9]+');
+            $router->post('/administration/vehicules-categories/:id/editer', 'VehicleCategory#editPost', true)->param('id', '[0-9]+');
+            $router->get('/administration/vehicules-categories/:id/supprimer', 'VehicleCategory#delete', true)->param('id', '[0-9]+');
+
+            // Véhicules Marques
+            $router->get('/administration/vehicules-marques', 'VehicleBrand#index', true);
+            $router->get('/administration/vehicules-marques/ajouter', 'VehicleBrand#addGet', true);
+            $router->post('/administration/vehicules-marques/ajouter', 'VehicleBrand#addPost', true);
+            $router->get('/administration/vehicules-marques/:id/editer','VehicleBrand#editGet', true)->param('id', '[0-9]+');
+            $router->post('/administration/vehicules-marques/:id/editer', 'VehicleBrand#editPost', true)->param('id', '[0-9]+');
+            $router->get('/administration/vehicules-marques/:id/supprimer', 'VehicleBrand#delete', true)->param('id', '[0-9]+');
+
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);
 
