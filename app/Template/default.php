@@ -13,19 +13,7 @@
         <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootflat.css">
 
         <style>
-            body {
-                padding-top: 50px;
-                padding-bottom: 20px;
-            }
-            .flashes {
-                position: absolute;
-                top: 55px;
-                right: 5px;
-                z-index: 10;
-            }
-            .checkbox > label {
-                padding-left: 0;
-            }
+            <?php require('common/style.css'); ?>
         </style>
 
         <title><?= $params['page_title'] ?></title>
@@ -57,8 +45,13 @@
                     </button>
                     <a class="navbar-brand" href="<?= WEB_ROOT; ?>/accueil">Reugeot</a>
                 </div>
+
                 <!-- Navigation Content -->
                 <div id="navbar" class="navbar-collapse collapse">
+
+                    <!-- Navigation Links -->
+                    <?php require('common/navbar-links.php'); ?>
+
                     <?php if (!isset($_SESSION['auth'])): ?>
                         <!-- Anonymous account Actions -->
                         <div class="navbar-right">
@@ -72,7 +65,9 @@
                             <a href="<?= WEB_ROOT; ?>/deconnexion" class="btn navbar-btn btn-danger">Déconnexion</a>
                         </div>
                     <?php endif; ?>
-                </div><!--/.navbar-collapse -->
+
+                </div>
+
             </div>
         </nav>
 

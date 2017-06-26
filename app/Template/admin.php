@@ -1,0 +1,124 @@
+<?php
+    $userRepo = new \App\Repository\UserRepository();
+    $userCount = $userRepo->count();
+    $vehicleRepo = new \App\Repository\VehicleRepository();
+    $vehicleCount = $vehicleRepo->count();
+    $vehicleCategoryRepo = new \App\Repository\VehicleCategoryRepository();
+    $vehicleCategoryCount = $vehicleCategoryRepo->count();
+    $vehicleBrandRepo = new \App\Repository\VehicleBrandRepository();
+    $vehicleBrandCount = $vehicleBrandRepo->count();
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Site Web de l'entreprise Reugeot">
+    <meta name="author" content="Bachelet Alexis (app.bachelet@gmail.com)">
+
+    <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= ASSETS; ?>/css/bootflat.css">
+
+    <style>
+        <?php require('common/style.css'); ?>
+    </style>
+
+    <title><?= $params['page_title'] ?></title>
+
+</head>
+
+<body>
+
+<!-- Flash Messages -->
+<div class="flashes">
+    <?php foreach(\App\Helper\FlashMessageHelper::display() as $flash): ?>
+        <div class="alert alert-<?= $flash['type']; ?> alert-dismissible flash" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+            <?= $flash['message']; ?>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+
+        <!-- Navigation Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="<?= WEB_ROOT; ?>/accueil">Reugeot</a>
+        </div>
+
+        <!-- Navigation Content -->
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <!-- Navigation Links -->
+            <?php require('common/navbar-links.php'); ?>
+
+            <!-- Logged account Actions -->
+            <div class="nav navbar-nav navbar-right">
+                <a href="<?= WEB_ROOT; ?>/mon-compte" class="btn navbar-btn btn-primary">Mon Compte</a>
+                <a href="<?= WEB_ROOT; ?>/deconnexion" class="btn navbar-btn btn-danger">Déconnexion</a>
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Administration</h1>
+    </div>
+</div>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="<?= WEB_ROOT . '/administration' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminHome') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;&nbsp;Accueil
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/utilisateurs' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminUser') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;Utilisateurs <span class="badge"><?= $userCount; ?></span>
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/vehicules' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicle') !== false && strpos($params['page_name'], 'adminVehicleCategory') === false && strpos($params['page_name'], 'adminVehicleBrand') === false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules <span class="badge"><?= $vehicleCount; ?></span>
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/vehicules-categories' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicleCategory') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;&nbsp;Catégories  <span class="badge"><?= $vehicleCategoryCount; ?></span>
+                </a>
+                <a href="<?= WEB_ROOT . '/administration/vehicules-marques' ?>" class="list-group-item <?php if (strpos($params['page_name'], 'adminVehicleBrand') !== false) {echo 'active';} ?>">
+                    <span class="glyphicon glyphicon-registration-mark"></span>&nbsp;&nbsp;&nbsp;Marques  <span class="badge"><?= $vehicleBrandCount; ?></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <?= $content ?>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="<?= ASSETS; ?>/js/jquery.min.js"></script>
+<script src="<?= ASSETS; ?>/js/bootstrap.min.js"></script>
+<script src="<?= ASSETS; ?>/js/icheck.min.js"></script>
+<script src="<?= ASSETS; ?>/js/jquery.fs.selecter.min.js"></script>
+<script src="<?= ASSETS; ?>/js/jquery.fs.stepper.min.js"></script>
+<script src="<?= ASSETS; ?>/js/app.js"></script>
+
+</body>
+
+</html>

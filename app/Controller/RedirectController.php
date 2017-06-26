@@ -11,10 +11,11 @@ class RedirectController extends AppController
     /**
      * Fonction statique permettant de rediriger un utilisateur depuis une autre fonction.
      * @param string $route
+     * @param array $params
      */
-    public static function redirect($route)
+    public static function redirect($route, $params = [])
     {
-        self::$route();
+        self::$route($params);
     }
 
     /**
@@ -41,6 +42,55 @@ class RedirectController extends AppController
     public function account()
     {
         header('Location: ' . WEB_ROOT . '/mon-compte');
+        exit(0);
+    }
+
+    public function adminUser() {
+        header('Location: ' . WEB_ROOT . '/administration/utilisateurs');
+        exit(0);
+    }
+
+    public function adminVehicle()
+    {
+        header('Location: ' . WEB_ROOT . '/administration/vehicules');
+        exit(0);
+    }
+
+    public function adminVehicleCategory()
+    {
+        header('Location: ' . WEB_ROOT . '/administration/vehicules-categories');
+        exit(0);
+    }
+
+    public function adminVehicleCategoryAdd()
+    {
+        header('Location: ' . WEB_ROOT . '/administration/vehicules-categories/ajouter');
+        exit(0);
+    }
+
+    public function adminVehicleCategoryEdit($params)
+    {
+        $id = $params['id'];
+        header('Location: ' . WEB_ROOT . '/administration/vehicules-categories/' . $id . '/editer');
+        exit(0);
+    }
+
+    public function adminVehicleBrand()
+    {
+        header('Location: ' . WEB_ROOT . '/administration/vehicules-marques');
+        exit(0);
+    }
+
+    public function adminVehicleBrandAdd()
+    {
+        header('Location: ' . WEB_ROOT . '/administration/vehicules-marques/ajouter');
+        exit(0);
+    }
+
+    public function adminVehicleBrandEdit($params)
+    {
+        $id = $params['id'];
+        header('Location: ' . WEB_ROOT . '/administration/vehicules-marques/' . $id . '/editer');
         exit(0);
     }
 }

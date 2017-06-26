@@ -72,7 +72,7 @@ class AccountController extends AppController
             $return = ['error' => true, 'message' => "Aucun fichier n'a été envoyé."];
         }
 
-        echo utf8_encode(json_encode($return));
+        echo json_encode($return);
         exit();
     }
 

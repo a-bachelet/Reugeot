@@ -2,8 +2,6 @@
 
 namespace App;
 use App\Helper\RememberTokenHelper;
-use App\Model\User;
-use App\Repository\UserRepository;
 use App\Router\AppRouter;
 
 /**
@@ -48,7 +46,39 @@ class App
         $router->post('/mon-compte/change-informations', 'Account#changeInfos', false);
 
         // Routes Administration
-        $router->get('/admin/test', 'Test#test', true);
+
+            // Acceuil
+            $router->get('/administration', 'Home#index', true);
+
+            // Utilisateurs
+            $router->get('/administration/utilisateurs', 'User#index', true);
+            $router->get('/administration/utilisateurs/:id', 'User#details', true)->param('id', '[0-9]+');
+            $router->get('/administration/utilisateurs/:id/supprimer', 'User#delete', true)->param('id', '[0-9]+');
+
+            // Véhicules
+            $router->get('/administration/vehicules', 'Vehicle#index', true);
+            $router->get('/administration/vehicules/:id', 'Vehicle#details', true)->param('id', '[0-9]+');
+            $router->get('/administration/vehicules/ajouter', 'Vehicle#addGet', true);
+            $router->post('/administration/vehicules/ajouter', 'Vehicle#addPost', true);
+            $router->get('/administration/vehicules/:id/editer','Vehicle#editGet', true)->param('id', '[0-9]+');
+            $router->post('/administration/vehicules/:id/editer', 'Vehicle#editPost', true)->param('id', '[0-9]+');
+            $router->get('/administration/vehicules/:id/supprimer', 'Vehicle#delete', true)->param('id', '[0-9]+');
+
+            // Véhicules Catégories
+            $router->get('/administration/vehicules-categories', 'VehicleCategory#index', true);
+            $router->get('/administration/vehicules-categories/ajouter', 'VehicleCategory#addGet', true);
+            $router->post('/administration/vehicules-categories/ajouter', 'VehicleCategory#addPost', true);
+            $router->get('/administration/vehicules-categories/:id/editer','VehicleCategory#editGet', true)->param('id', '[0-9]+');
+            $router->post('/administration/vehicules-categories/:id/editer', 'VehicleCategory#editPost', true)->param('id', '[0-9]+');
+            $router->get('/administration/vehicules-categories/:id/supprimer', 'VehicleCategory#delete', true)->param('id', '[0-9]+');
+
+            // Véhicules Marques
+            $router->get('/administration/vehicules-marques', 'VehicleBrand#index', true);
+            $router->get('/administration/vehicules-marques/ajouter', 'VehicleBrand#addGet', true);
+            $router->post('/administration/vehicules-marques/ajouter', 'VehicleBrand#addPost', true);
+            $router->get('/administration/vehicules-marques/:id/editer','VehicleBrand#editGet', true)->param('id', '[0-9]+');
+            $router->post('/administration/vehicules-marques/:id/editer', 'VehicleBrand#editPost', true)->param('id', '[0-9]+');
+            $router->get('/administration/vehicules-marques/:id/supprimer', 'VehicleBrand#delete', true)->param('id', '[0-9]+');
 
         // Routes Redirigées
         $router->get('/', 'Redirect#home', false);

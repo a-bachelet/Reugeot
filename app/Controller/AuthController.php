@@ -99,13 +99,18 @@ class AuthController extends AppController
                         'profile_pic' => ''
                     ]);
 
+                    $id = intval($db->getLastInsertedId());
+
+                    $query = "UPDATE users SET profile_pic = :profile_pic WHERE id = :id";
+                    $db->query($query, false, ['id' => $id, 'profile_pic' => '/uploads/profile_pics/' . $id . '.jpg']);
+
                     $mail_content = "
                         <h1>Confirmation d'inscription sur le site web de Reugeot.</h1>
                         <p>Nous vous remercions pour cette inscription et espérons que notre site vous plaise.</p>
                         <p>Pour confirmer votre inscription veuillez cliquer <a href='" . WEB_ROOT . "/activation?token=$activation_token" . "'>ici</a>.</p>
                     ";
 
-                    mail($email, 'Reugeot - Confirmation d\'inscription', utf8_decode($mail_content));
+                    mail($email, 'Reugeot - Confirmation d\'inscription', $mail_content);
 
                     FlashMessageHelper::add('success', 'Votre inscription s\'est bien déroulée, merci de vérifier vos emails afin d\'activer votre compte.');
                     RedirectController::redirect('home');
