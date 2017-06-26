@@ -23,6 +23,13 @@ $(document).ready(function() {
            $('#profile_pic_text').val('');
        }
     });
+    $('#vehicle_pic').on('change', function () {
+        if (this.files[0] && this.files[0].name) {
+            $('#vehicle_pic_text').val(this.files[0].name);
+        } else {
+            $('#vehicle_pic_text').val('');
+        }
+    });
 
     // Gestion de l'upload de l'image de profil.
     $('#profilePicForm').on('submit', function (event) {
@@ -107,6 +114,56 @@ $(document).ready(function() {
                 $(this).text(Math.ceil(now));
             }
         });
+    });
+
+    // Formulaire d'ajout / d'édition de véhicules
+    $('#vehicleForm').on('submit', function (event) {
+        event.preventDefault();
+        alert($('#active').val());
+        var file = document.forms['vehicleForm']['vehicle_pic'].files[0];
+        var model = document.forms['vehicleForm']['model'].value;
+        var category = document.forms['vehicleForm']['vehicle_category'].value;
+        var brand = document.forms['vehicleForm']['vehicle_brand'].value;
+        var price = document.forms['vehicleForm']['price_without_taxes'].value;
+        var professional = document.forms['vehicleForm']['professional'].value;
+        var active = document.forms['vehicleForm']['active'].value;
+        var formData = new FormData();
+        formData.append('vehicle_pic', file);
+        formData.append('model', model);
+        formData.append('vehicle_category', category);
+        formData.append('vehicle_brand', brand);
+        formData.append('price_without_taxes', price);
+        formData.append('active', active);
+        formData.append('professional', professional);
+        var ajax = new XMLHttpRequest();
+        var progress_bar = $('#vehicle-pic-progress-bar');
+        ajax.upload.addEventListener('progress', function (event) {
+            var percent = Math.round((event.loaded/event.total)*100);
+            progress_bar.attr('aria-valuenow', percent);
+            progress_bar.css('width', percent + '%');
+            progress_bar.html(percent + '%');
+        }, false);
+        ajax.addEventListener('load', function(event) {
+            progress_bar.attr('aria-valuenow', 0);
+            progress_bar.css('width', 0 + '%');
+            progress_bar.html('');
+            alert(event.target.responseText);
+            var response = JSON.parse(event.target.responseText);
+        }, false);
+        ajax.addEventListener('error', function (event) {
+            alert('Erreur lors du chagement du chargement de l\'image !');
+            progress_bar.attr('aria-valuenow', 0);
+            progress_bar.css('width', 0 + '%');
+            progress_bar.html('');
+        }, false);
+        ajax.addEventListener('abort', function (event) {
+            alert('Erreur lors du chagement du chargement de l\'image !');
+            progress_bar.attr('aria-valuenow', 0);
+            progress_bar.css('width', 0 + '%');
+            progress_bar.html('');
+        }, false);
+        ajax.open('POST', 'http://' + window.location.hostname + window.location.pathname);
+        ajax.send(formData);
     });
 
 });
