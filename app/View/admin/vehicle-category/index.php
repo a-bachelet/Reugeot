@@ -36,7 +36,7 @@
                     <?php foreach($params['vehicleCategories'] as $vehicleCategory): ?>
                         <tr>
                             <td><?= $vehicleCategory->getId() ?></td>
-                            <td><?= utf8_encode($vehicleCategory->getName()); ?></td>
+                            <td><?= $vehicleCategory->getName(); ?></td>
                             <td align="center">
                                 <a href="<?= WEB_ROOT . '/administration/vehicules-categories/' . $vehicleCategory->getId() . '/editer'; ?>" class="btn btn-warning btn-sm">Editer</a>
                                 <a href="<?= WEB_ROOT . '/administration/vehicules-categories/' . $vehicleCategory->getId() . '/supprimer'; ?>" class="btn btn-danger btn-sm">Supprimer</a>

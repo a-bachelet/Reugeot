@@ -2,7 +2,7 @@
 <h4>Image de Profil :</h4>
 
 <!-- Pic Preview -->
-<img id="profile-thumbnail" class="img-thumbnail" src="<?= WEB_ROOT . $params['user']->getProfilePic(); ?>">
+<img id="profile-thumbnail" class="img-thumbnail img-circle" src="<?= WEB_ROOT . $params['user']->getProfilePic(); ?>">
 
 <!-- Form -->
 <form id="profilePicForm" class="form-horizontal" method="POST">

@@ -15,7 +15,7 @@
                     <?php if (is_file(FOLDER_ROOT . '/web' . $params['user']->getProfilePic())): ?>
                         <img class="img-circle" src="<?= WEB_ROOT . $params['user']->getProfilePic(); ?>" alt="">
                     <?php else: ?>
-                        <img class="img-circle" src="<?= WEB_ROOT . '/uploads/profile_pics/nopic.png' ?>" alt="">
+                        <img class="img-thumbnail img-circle" src="<?= WEB_ROOT . '/uploads/profile_pics/nopic.png' ?>" alt="">
                     <?php endif; ?>
                 </div>
 

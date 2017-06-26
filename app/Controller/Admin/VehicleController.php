@@ -78,9 +78,6 @@ class VehicleController extends AppController
 
     public function addPost()
     {
-        var_dump($_POST);
-        exit();
-
         $return  = ['valid' => true, 'errors' => []];
 
         foreach ($_POST as $k => $v) {
@@ -101,7 +98,7 @@ class VehicleController extends AppController
 
                 if (isset($types[$guessedExtension])) {
 
-                    $tmp = $_FILES['profile_pic']['tmp_name'];
+                    $tmp = $_FILES['vehicle_pic']['tmp_name'];
                     $infos = getimagesize($tmp);
                     if ($infos['mime'] === $types[$guessedExtension] ) {
 
@@ -118,18 +115,21 @@ class VehicleController extends AppController
                         $professional = $_POST['professional'] === 'on' ? 1 : 0;
                         $active = $_POST['active'] === 'on' ? 1 : 0;
 
-                        $query = 'INSERT INTO vehicles (model, vehicle_category_id, vehicle_brand_id, price_without_taxes, price_with_taxes, professional, vehicle_picture, active) VALUES (:model, :vehicle_category_id, :vehicle_brand_id, :price_without_taxes, :price_with_taxes, :professional, :vehicle_picture, :active)';
+                        $query = 'INSERT INTO vehicles (model, vehicle_category_id, vehicle_brand_id, price_without_taxes, price_with_taxes, professional, active, vehicle_picture) VALUES (:model, :vehicle_category_id, :vehicle_brand_id, :price_without_taxes, :price_with_taxes, :professional, :active, :vehicle_picture)';
                         $db = AppDatabase::getInstance();
 
-                        $db->query($query, false, [
+                        $result = $db->query($query, false, [
                             'model' => $_POST['model'],
-                            'vehicle_category_id' => $_POST['vehicle_category_id'],
-                            'vehicle_brand_id' => $_POST['vehicle_brand_id'],
+                            'vehicle_category_id' => $_POST['vehicle_category'],
+                            'vehicle_brand_id' => $_POST['vehicle_brand'],
                             'price_without_taxes' => $_POST['price_without_taxes'],
                             'price_with_taxes' => $priceWithTaxes,
                             'professional' => $professional,
-                            'active' => $active
+                            'active' => $active,
+                            'vehicle_picture' => ''
                         ]);
+
+                        var_dump($_POST['model'], $_POST['vehicle_category'], $_POST['vehicle_brand'], $_POST['price_without_taxes'], $priceWithTaxes, $professional, $active);
 
                         $lastId = intval($db->getLastInsertedId());
 
@@ -160,7 +160,7 @@ class VehicleController extends AppController
             $return = ['valid' => false, 'errors' => $form->getErrors()];
         }
 
-        echo utf8_encode(json_encode($return));
+        echo json_encode($return);
         exit(0);
     }
 
@@ -175,10 +175,20 @@ class VehicleController extends AppController
             RedirectController::redirect('adminVehicle');
         }
 
+        $vehicleCategoryRepo = new VehicleCategoryRepository();
+        /** @var VehicleCategory[] $categories **/
+        $categories = $vehicleCategoryRepo->findAll();
+
+        $vehicleBrandRepo =  new VehicleBrandRepository();
+        /** @var VehicleBrand[] $brands **/
+        $brands = $vehicleBrandRepo->findAll();
+
         $this->render('admin', 'admin.vehicle.edit', [
             'page_name' => 'adminVehicleEdit',
             'page_title' => 'Administration - Véhicules',
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
+            'categories' => $categories,
+            'brands' => $brands
         ]);
     }
 
@@ -213,7 +223,7 @@ class VehicleController extends AppController
 
                 if (isset($types[$guessedExtension])) {
 
-                    $tmp = $_FILES['profile_pic']['tmp_name'];
+                    $tmp = $_FILES['vehicle_pic']['tmp_name'];
                     $infos = getimagesize($tmp);
                     if ($infos['mime'] === $types[$guessedExtension] ) {
 
@@ -272,7 +282,7 @@ class VehicleController extends AppController
             $return = ['valid' => false, 'errors' => $form->getErrors()];
         }
 
-        echo utf8_encode(json_encode($return));
+        echo json_encode($return);
         exit(0);
     }
 

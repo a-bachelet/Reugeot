@@ -47,7 +47,7 @@
                                     }
                                 ?>
                             </td>
-                            <td><?= utf8_encode($vehicle->getModel()); ?></td>
+                            <td><?= $vehicle->getModel(); ?></td>
                             <td><?= $vehicle->getVehicleCategory()->getName(); ?></td>
                             <td><?= $vehicle->getVehicleBrand()->getName(); ?></td>
                             <td><?= $vehicle->isActive() ? 'Oui' : 'Non' ?></td>

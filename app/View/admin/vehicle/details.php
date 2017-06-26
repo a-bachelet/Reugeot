@@ -5,7 +5,7 @@
 
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules - Détails : <strong><?= utf8_encode($params['vehicle']->getModel()); ?></strong>
+                    <span class="glyphicon glyphicon-road"></span>&nbsp;&nbsp;&nbsp;Véhicules - Détails : <strong><?= $params['vehicle']->getModel(); ?></strong>
                 </h3>
             </div>
 
@@ -13,9 +13,9 @@
 
                 <div class="col-md-3 col-xs-12">
                     <?php if (is_file(FOLDER_ROOT . '/web' . $params['vehicle']->getVehiclePicture())): ?>
-                        <img class="img-circle" src="<?= WEB_ROOT . $params['user']->getVehiclePicture(); ?>" alt="">
+                        <img class="img-thumbnail img-circle" src="<?= WEB_ROOT . $params['vehicle']->getVehiclePicture(); ?>" alt="">
                     <?php else: ?>
-                        <img class="img-circle" src="<?= WEB_ROOT . '/uploads/profile_pics/nopic.png' ?>" alt="">
+                        <img class="img-thumbnail img-circle" src="<?= WEB_ROOT . '/uploads/profile_pics/nopic.png' ?>" alt="">
                     <?php endif; ?>
                 </div>
 
@@ -24,7 +24,7 @@
                     <table class="table table-striped panel-table">
                         <tr>
                             <td>Modèle :</td>
-                            <td><?= utf8_encode($params['vehicle']->getModel()); ?></td>
+                            <td><?= $params['vehicle']->getModel(); ?></td>
                         </tr>
                         <tr>
                             <td>Catégorie :</td>

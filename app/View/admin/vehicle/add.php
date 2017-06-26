@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label for="vehicle_category" class="col-sm-3 control-label">Marque :</label>
                                 <div class="col-sm-9">
-                                    <select id="vehicle_category" name="vehicle_brand" class="form-control">
+                                    <select id="vehicle_brand" name="vehicle_brand" class="form-control">
                                         <?php foreach ($params['brands'] as $brand): ?>
                                             <option value="<?= $brand->getId(); ?>"><?= $brand->getName(); ?></option>
                                         <?php endforeach; ?>
@@ -81,7 +81,6 @@
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="checkbox">
                                         <label>
-                                            <input id="professional" name="professional" type="hidden" value="'off'">
                                             <input id="professional" name="professional" type="checkbox"> Professionnel
                                         </label>
                                     </div>
@@ -92,7 +91,6 @@
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <div class="checkbox">
                                         <label>
-                                            <input id="active" name="active" type="hidden" value="'off'">
                                             <input id="active" name="active" type="checkbox"> Actif
                                         </label>
                                     </div>

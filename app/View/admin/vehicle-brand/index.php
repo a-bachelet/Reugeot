@@ -36,7 +36,7 @@
                     <?php foreach($params['vehicleBrands'] as $vehicleBrand): ?>
                         <tr>
                             <td><?= $vehicleBrand->getId() ?></td>
-                            <td><?= utf8_encode($vehicleBrand->getName()); ?></td>
+                            <td><?= $vehicleBrand->getName(); ?></td>
                             <td align="center">
                                 <a href="<?= WEB_ROOT . '/administration/vehicules-marques/' . $vehicleBrand->getId() . '/editer'; ?>" class="btn btn-warning btn-sm">Editer</a>
                                 <a href="<?= WEB_ROOT . '/administration/vehicules-marques/' . $vehicleBrand->getId() . '/supprimer'; ?>" class="btn btn-danger btn-sm">Supprimer</a>

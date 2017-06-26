@@ -110,7 +110,7 @@ class AuthController extends AppController
                         <p>Pour confirmer votre inscription veuillez cliquer <a href='" . WEB_ROOT . "/activation?token=$activation_token" . "'>ici</a>.</p>
                     ";
 
-                    mail($email, 'Reugeot - Confirmation d\'inscription', utf8_decode($mail_content));
+                    mail($email, 'Reugeot - Confirmation d\'inscription', $mail_content);
 
                     FlashMessageHelper::add('success', 'Votre inscription s\'est bien déroulée, merci de vérifier vos emails afin d\'activer votre compte.');
                     RedirectController::redirect('home');
