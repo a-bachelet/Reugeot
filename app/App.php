@@ -45,6 +45,10 @@ class App
         $router->post('/mon-compte/change-mot-de-passe', 'Account#changePassword', false);
         $router->post('/mon-compte/change-informations', 'Account#changeInfos', false);
 
+        // Routes Véhicules
+        $router->get('/vehicules', 'Vehicle#index', false);
+        $router->get('/vehicules/:id', 'Vehicle#details', false)->param('id', '[0-9]+');
+
         // Routes Administration
 
             // Acceuil
