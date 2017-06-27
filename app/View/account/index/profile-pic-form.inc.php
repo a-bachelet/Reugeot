@@ -2,7 +2,11 @@
 <h4>Image de Profil :</h4>
 
 <!-- Pic Preview -->
-<img id="profile-thumbnail" class="img-thumbnail img-circle" src="<?= WEB_ROOT . $params['user']->getProfilePic(); ?>">
+<?php if (is_file(FOLDER_ROOT . '/web' . $params['user']->getProfilePic())): ?>
+    <img id="profile-thumbnail" class="img-thumbnail img-circle" src="<?= WEB_ROOT . $params['user']->getProfilePic(); ?>">
+<?php else: ?>
+    <img id="profile-thumbnail" class="img-thumbnail img-circle" src="<?= WEB_ROOT . '/uploads/profile_pics/nopic.png' ?>">
+<?php endif; ?>
 
 <!-- Form -->
 <form id="profilePicForm" class="form-horizontal" method="POST">

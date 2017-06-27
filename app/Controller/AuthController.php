@@ -154,6 +154,8 @@ class AuthController extends AppController
                         'professional' => $user->isProfessional()
                     ];
 
+                    $_SESSION['panier'] = [];
+
                     FlashMessageHelper::add('success', 'Votre compte a bien été activé. Vous êtes désormais connecté.');
                     RedirectController::redirect('home');
 
