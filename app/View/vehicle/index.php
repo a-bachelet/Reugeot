@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="col-md-6 col-xs-6" style="height:30px;line-height: 30px">
                                         <a href="<?= WEB_ROOT . '/vehicules/' . $vehicle->getId(); ?>" class="btn btn-primary btn-sm ">Détails</a>
-                                        <button data-toggle="modal" data-target="#addBasketVehicleModal" class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-shopping-cart"> +</span></button>
+                                        <button vehicle="<?= $vehicle->getId(); ?>" data-toggle="modal" data-target="#addBasketVehicleModal" class="basketVehicleAddButton btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-shopping-cart"> +</span></button>
                                     </div>
                                 </div>
                             </div>

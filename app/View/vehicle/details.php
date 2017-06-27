@@ -66,7 +66,7 @@
                 <div class="panel-footer">
                     <div class="row">
                         <div class="col-md-12">
-                            <button class="btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp; Ajouter au Panier</button>
+                            <button vehicle="<?= $params['vehicle']->getId(); ?>" data-toggle="modal" data-target="#addBasketVehicleModal" class="basketVehicleAddButton btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp; Ajouter au Panier</button>
                         </div>
                     </div>
                 </div>
@@ -76,3 +76,5 @@
         </div>
     </div>
 </div>
+
+<?php require('add-basket-vehicle-modal.php') ?>

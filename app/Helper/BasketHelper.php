@@ -10,7 +10,7 @@ class BasketHelper
 
         foreach ($_SESSION['panier'] as $basket_cat) {
             foreach ($basket_cat as $product) {
-                $quentity += $product['quantity'];
+                $quantity += $product['quantity'];
             }
         }
 

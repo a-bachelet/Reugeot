@@ -20,13 +20,22 @@ class BasketController extends AppController
         ]);
     }
 
-    public function addVehicle($id, $quantity)
+    public function addVehicle()
     {
         IsAuthenticatedHelper::verifyAuth();
 
+        foreach ($_POST as $k => $v) {
+            $_POST[$k] = htmlspecialchars($v);
+        }
+
+        if (!isset($_POST['id']) || !isset($_POST['quantity'])) {
+            FlashMessageHelper::add('danger', 'L\'ajout de véhicules dans le panier a échoué.');
+            RedirectController::redirect('vehicles');
+        }
+
         $vehicleRepo = new VehicleRepository();
         /** @var Vehicle $vehicle **/
-        $vehicle = $vehicleRepo->find($id);
+        $vehicle = $vehicleRepo->find($_POST['id']);
 
         if (is_null($vehicle->getId()) || !$vehicle->isActive()) {
             FlashMessageHelper::add('danger', 'Ce véhicule n\'existe plus ou n\'est pas disponible');
@@ -36,10 +45,10 @@ class BasketController extends AppController
         if (!isset($_SESSION['panier']['vehicules'][$vehicle->getId()])) {
             $_SESSION['panier']['vehicules'][$vehicle->getId()] = [
                 'product' => $vehicle,
-                'quantity' => $quantity
+                'quantity' => $_POST['quantity']
             ];
         } else {
-            $_SESSION['panier']['vehicules'][$vehicle->getId()]['quantity'] += $quantity;
+            $_SESSION['panier']['vehicules'][$vehicle->getId()]['quantity'] += $_POST['quantity'];
         }
 
         FlashMessageHelper::add('success', 'Le / les produits ont été ajoutés au panier.');

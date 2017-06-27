@@ -48,7 +48,7 @@ class App
         // Routes Panier
         $router->get('/panier', 'Basket#index', false);
         $router->get('/panier/validate', 'Basket#validate', false);
-        $router->get('/panier/ajouter/vehicules/:id/:quantity', 'Basket#addVehicle', false)->param('id', '[0-9]+')->param('quantity', '[0-9]+');
+        $router->post('/panier/ajouter/vehicules', 'Basket#addVehicle', false);
 
         // Routes Véhicules
         $router->get('/vehicules', 'Vehicle#index', false);

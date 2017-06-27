@@ -175,4 +175,10 @@ $(document).ready(function() {
 
     });
 
+    // Ajout des véhicules dans le panier
+    $('.basketVehicleAddButton').on('click', function (event) {
+        var id = $(this).attr('vehicle');
+        $('#addBasketVehicleIdInput').val(id);
+    });
+
 });
