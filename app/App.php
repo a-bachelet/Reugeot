@@ -45,6 +45,11 @@ class App
         $router->post('/mon-compte/change-mot-de-passe', 'Account#changePassword', false);
         $router->post('/mon-compte/change-informations', 'Account#changeInfos', false);
 
+        // Routes Panier
+        $router->get('/panier', 'Basket#index', false);
+        $router->get('/panier/validate', 'Basket#validate', false);
+        $router->get('/panier/ajouter/vehicules/:id/:quantity', 'Basket#addVehicle', false)->param('id', '[0-9]+')->param('quantity', '[0-9]+');
+
         // Routes Véhicules
         $router->get('/vehicules', 'Vehicle#index', false);
         $router->get('/vehicules/:id', 'Vehicle#details', false)->param('id', '[0-9]+');

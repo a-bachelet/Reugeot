@@ -12,3 +12,11 @@
     </li>
 
 </ul>
+
+<ul class="nav navbar-nav navbar-right">
+    <?php if (isset($_SESSION['auth'])): ?>
+        <li class="<?php if (strpos($params['page_name'], 'basket') !== false) {echo 'active';} ?>">
+            <a href="<?= WEB_ROOT ?>/panier"><span class="glyphicon glyphicon-shopping-cart"></span> Panier &nbsp;&nbsp;&nbsp;<span class="badge badge-success"><?= \App\Helper\BasketHelper::count(); ?></span></a>
+        </li>
+    <?php endif; ?>
+</ul>

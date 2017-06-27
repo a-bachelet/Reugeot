@@ -102,4 +102,10 @@ class RedirectController extends AppController
         header('Location: ' . WEB_ROOT . '/administration/vehicules-marques/' . $id . '/editer');
         exit(0);
     }
+
+    public function vehicles()
+    {
+        header('Location: ' . WEB_ROOT . '/vehicules');
+        exit(0);
+    }
 }
