@@ -214,6 +214,9 @@ class AuthController extends AppController
                 'professional' => $user->isProfessional()
             ];
 
+            $_SESSION['panier'] = [];
+            $_SESSION['panier']['vehicules']= [];
+
             if (isset($_POST['remember']) && $_POST['remember'] === 'on') {
                 RememberTokenHelper::setToken($user);
             }
@@ -234,6 +237,7 @@ class AuthController extends AppController
         RememberTokenHelper::removeToken();
         if (isset($_SESSION['auth'])) {
             unset($_SESSION['auth']);
+            unset($_SESSION['panier']);
             FlashMessageHelper::add('success', 'Vous êtes maintenant déconnecté.');
         }
         RedirectController::redirect('home');

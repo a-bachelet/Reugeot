@@ -26,11 +26,12 @@
 
                             <div class="panel-footer">
                                 <div class="row">
-                                    <div class="col-md-8 col-xs-8" style="height:30px;line-height: 30px">
+                                    <div class="col-md-6 col-xs-6" style="height:30px;line-height: 30px">
                                         <?= number_format($vehicle->getPriceWithTaxes(), 2, ',', ' '); ?> €
                                     </div>
-                                    <div class="col-md-4 col-xs-4" style="height:30px;line-height: 30px">
-                                        <a href="<?= WEB_ROOT . '/vehicules/' . $vehicle->getId(); ?>" class="btn btn-success btn-sm pull-right">Détails</a>
+                                    <div class="col-md-6 col-xs-6" style="height:30px;line-height: 30px">
+                                        <a href="<?= WEB_ROOT . '/vehicules/' . $vehicle->getId(); ?>" class="btn btn-primary btn-sm ">Détails</a>
+                                        <button vehicle="<?= $vehicle->getId(); ?>" data-toggle="modal" data-target="#addBasketVehicleModal" class="basketVehicleAddButton btn btn-success btn-sm pull-right"><span class="glyphicon glyphicon-shopping-cart"> +</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -50,3 +51,5 @@
         </div>
     </div>
 </div>
+
+<?php require('add-basket-vehicle-modal.php') ?>

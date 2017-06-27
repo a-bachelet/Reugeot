@@ -175,4 +175,20 @@ $(document).ready(function() {
 
     });
 
+    // Ajout des véhicules dans le panier
+    $('.basketVehicleAddButton').on('click', function (event) {
+        var id = $(this).attr('vehicle');
+        $('#addBasketVehicleIdInput').val(id);
+    });
+
+    // Ajouter / Retirer des véhicules du panier
+    $('.basketIndexAddVehicleButton').on('click', function (event) {
+        var id = $(this).attr('vehicle');
+        $('#basketIndexAddVehiculeInputId').val(id);
+    });
+    $('.basketIndexRemoveVehicleButton').on('click', function (event) {
+        var id = $(this).attr('vehicle');
+        $('#basketIndexRemoveVehiculeInputId').val(id);
+    });
+
 });

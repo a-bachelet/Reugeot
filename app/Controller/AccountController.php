@@ -9,7 +9,9 @@ use App\Form\InformationProfessionalForm;
 use App\Helper\FlashMessageHelper;
 use App\Helper\FormErrorHelper;
 use App\Helper\IsAuthenticatedHelper;
+use App\Model\Bill;
 use App\Model\User;
+use App\Repository\BillRepository;
 use App\Repository\UserRepository;
 
 class AccountController extends AppController
@@ -26,10 +28,15 @@ class AccountController extends AppController
             RedirectController::redirect('logout');
         }
 
+        $billRepo = new BillRepository();
+        /** @var Bill[] $bills **/
+        $bills = $billRepo->findBy(['user_id' => $_SESSION['auth']['id']]);
+
         $this->render('default', 'account.index.index', [
             'page_name' => 'account-index',
             'page_title' => 'Reugeot - Mon Compte',
-            'user' => $user
+            'user' => $user,
+            'bills' => $bills
         ]);
     }
 

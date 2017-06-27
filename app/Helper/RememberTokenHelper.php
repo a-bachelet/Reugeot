@@ -66,6 +66,9 @@ class RememberTokenHelper
             'role' => $user->getRole()->getName(),
             'professional' => $user->isProfessional()
         ];
+
+        $_SESSION['panier'] = [];
+        $_SESSION['panier']['vehicules']= [];
     }
 
     /**
