@@ -19,6 +19,15 @@ class RedirectController extends AppController
     }
 
     /**
+     * Fonction appelée lors d'une redirection vers la page 404 Not Found.
+     */
+    public function err404()
+    {
+        header('Location: ' . WEB_ROOT . '/404');
+        exit(0);
+    }
+
+    /**
      * Fonction appelée lors d'une redirection sur la page d'accueil.
      */
     public function home()

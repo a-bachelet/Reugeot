@@ -7,4 +7,8 @@
         </li>
     <?php endif; ?>
 
+    <li class="<?php if (strpos($params['page_name'], 'vehicles') !== false) {echo 'active';} ?>">
+        <a href="<?= WEB_ROOT ?>/vehicules"><span class="glyphicon glyphicon-road"></span> Véhicules</a>
+    </li>
+
 </ul>
