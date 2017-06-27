@@ -22,6 +22,33 @@
                     <?php require('profile-pic-form.inc.php'); ?>
                 </div>
             </div>
+            <br/>
+            <!-- Bills List -->
+            <div class="row">
+                <h4>Factures :</h4>
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Référence</th>
+                                <th class="text-center">
+                                    <span class="glyphicon glyphicon-cog"></span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($params['bills'] as $bill): ?>
+                                <tr>
+                                    <td><?= $bill->getReference(); ?></td>
+                                    <td class="text-center">
+                                        <a href="<?= WEB_ROOT . '/factures/' . $bill->getId(); ?>" class="btn btn-sm btn-primary">Détails</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         </div>
 

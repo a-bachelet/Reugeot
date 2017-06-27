@@ -15,6 +15,7 @@
                         <th>Prix HT</th>
                         <th>Prix TTC</th>
                         <th>Qté.</th>
+                        <th class="text-center" align="center"><span class="glyphicon glyphicon-cog"></span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,9 +25,13 @@
                             <?php if ($k === 'vehicules'): ?>
                                 <td><?= $product['product']->getModel(); ?></td>
                                 <td>Véhicules</td>
-                                <td><?= $product['product']->getPriceWithoutTaxes(); ?></td>
-                                <td><?= $product['product']->getPriceWithTaxes(); ?></td>
+                                <td><?= number_format($product['product']->getPriceWithoutTaxes(), 2, ',', ' '); ?> €</td>
+                                <td><?= number_format($product['product']->getPriceWithTaxes(), 2, ',', ' '); ?> €</td>
                                 <td><?= $product['quantity']; ?></td>
+                                <td align="center">
+                                    <button vehicle="<?= $product['product']->getId(); ?>" data-toggle="modal" data-target="#basketIndexRemoveVehicleModal" class="basketIndexRemoveVehicleButton btn btn-sm btn-danger">-</button>
+                                    <button vehicle="<?= $product['product']->getId(); ?>" data-toggle="modal" data-target="#basketIndexAddVehicleModal" class="basketIndexAddVehicleButton btn btn-sm btn-success">+</button>
+                                </td>
                             <?php endif; ?>
                         </tr>
                     <?php endforeach; ?>
@@ -48,14 +53,16 @@
                     <tr>
                         <td></td>
                         <td><?= $params['total_quantity'] ?></td>
-                        <td><?= $params['total_bill_ht'] ?></td>
-                        <td><?= $params['total_bill_ttc'] ?></td>
+                        <td><?= number_format($params['total_bill_ht'], 2, ',', ' '); ?> €</td>
+                        <td><?= number_format($params['total_bill_ttc'], 2, ',', ' '); ?> €</td>
                     </tr>
                 </tbody>
             </table>
             <br/>
-            <button class="btn btn-success pull-right"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;&nbsp;Payer</button>
-            <button style="margin-right: 5px;" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Vider</button>
+            <a href="<?= WEB_ROOT . '/panier/valider' ?>" class="btn btn-success pull-right"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;&nbsp;Payer</a>
+            <a href="<?= WEB_ROOT . '/panier/vider' ?>" style="margin-right: 5px;" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span>&nbsp;&nbsp;&nbsp;Vider</a>
         </div>
     </div>
 </div>
+
+<?php require ('add-vehicle-modal.php'); require('remove-vehicule-modal.php'); ?>

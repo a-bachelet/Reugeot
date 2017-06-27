@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Database\AppDatabase;
 use App\Helper\FlashMessageHelper;
 use App\Helper\IsAuthenticatedHelper;
 use App\Model\Vehicle;
@@ -20,8 +21,8 @@ class BasketController extends AppController
         foreach ($_SESSION['panier'] as $category) {
             foreach ($category as $product) {
                 $total_quantity += $product['quantity'];
-                $total_bill_ht += $product['product']->getPriceWithoutTaxes();
-                $total_bill_ttc += $product['product']->getPriceWithTaxes();
+                $total_bill_ht += $product['product']->getPriceWithoutTaxes() * $product['quantity'];
+                $total_bill_ttc += $product['product']->getPriceWithTaxes() * $product['quantity'];
             }
         }
 
@@ -71,7 +72,17 @@ class BasketController extends AppController
         RedirectController::redirect('vehicles');
     }
 
-    public function removeVehicle($id, $quantity) {
+    public function removeVehicle() {
+
+        IsAuthenticatedHelper::verifyAuth();
+
+        foreach ($_POST as $k => $v) {
+            $_POST[$k] = htmlspecialchars($v);
+        }
+
+        $id = $_POST['id'];
+        $quantity = $_POST['quantity'];
+
         if (isset($_SESSION['panier']['vehicules'][$id])) {
             $_SESSION['panier']['vehicules'][$id]['quantity'] -= $quantity;
             if ($_SESSION['panier']['vehicules'][$id]['quantity'] <= 0) {
@@ -79,11 +90,58 @@ class BasketController extends AppController
             }
         }
         FlashMessageHelper::add('success', 'Le / Les produits ont été correctement retirés du panier.');
-        RedirectController::redirect('vehicules');
+        RedirectController::redirect('vehicles');
+    }
+
+    public function empty()
+    {
+        unset($_SESSION['panier']);
+        $_SESSION['panier'] = [];
+        FlashMessageHelper::add('success', 'Votre panier a correctement été vidé.');
+        RedirectController::redirect('home');
     }
 
     public function validate()
     {
+        IsAuthenticatedHelper::verifyAuth();
 
+        try {
+            $date = new \DateTime();
+            $query = 'INSERT INTO bills (reference, user_id, date) VALUES (:reference, :user_id, now())';
+            $db = AppDatabase::getInstance();
+            $db->query($query, false, [
+                'reference' => uniqid('wsdafretyuio', true),
+                'user_id' => $_SESSION['auth']['id']
+            ]);
+
+            $billId = $db->getLastInsertedId();
+
+            $tab = [];
+
+            foreach ($_SESSION['panier']['vehicules'] as $k => $v) {
+                $tab[$k] = intval($v['quantity']);
+            }
+
+            $query = 'INSERT INTO bill_vehicle (bill_id, vehicle_id, quantity) VALUES (:bill_id, :vehicle_id, :quantity)';
+
+            foreach ($tab as $k => $v) {
+                $db->query($query, false, [
+                    'bill_id' => $billId,
+                    'vehicle_id' => $k,
+                    'quantity' => $v
+                ]);
+            }
+
+            unset($_SESSION['panier']);
+            $_SESSION['panier'] = [];
+
+            FlashMessageHelper::add('success', 'Votre achat a bien été effectué.');
+            FlashMessageHelper::add('success', 'Une nouvelle facture est disponible dans la section Mon Compte.');
+            RedirectController::redirect('home');
+
+        } catch(\PDOException $e) {
+            FlashMessageHelper::add('danger', 'Une erreur s\'est produite.');
+            RedirectController::redirect('home');
+        }
     }
 }

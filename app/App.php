@@ -47,8 +47,13 @@ class App
 
         // Routes Panier
         $router->get('/panier', 'Basket#index', false);
-        $router->get('/panier/validate', 'Basket#validate', false);
+        $router->get('/panier/valider', 'Basket#validate', false);
+        $router->get('/panier/vider', 'Basket#empty', false);
         $router->post('/panier/ajouter/vehicules', 'Basket#addVehicle', false);
+        $router->post('/panier/supprimer/vehicules', 'Basket#removeVehicle', false);
+
+        // Routes Factures
+        $router->get('/factures/:id', 'Bill#details', false)->param('id', '[0-9]+');
 
         // Routes Véhicules
         $router->get('/vehicules', 'Vehicle#index', false);
