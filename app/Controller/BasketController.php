@@ -13,10 +13,25 @@ class BasketController extends AppController
     {
         IsAuthenticatedHelper::verifyAuth();
 
+        $total_quantity = 0;
+        $total_bill_ht = 0;
+        $total_bill_ttc = 0;
+
+        foreach ($_SESSION['panier'] as $category) {
+            foreach ($category as $product) {
+                $total_quantity += $product['quantity'];
+                $total_bill_ht += $product['product']->getPriceWithoutTaxes();
+                $total_bill_ttc += $product['product']->getPriceWithTaxes();
+            }
+        }
+
         $this->render('default', 'basket.index', [
             'page_name' => 'basketIndex',
             'page_title' => 'Reugeot - Panier',
-            'panier' => $_SESSION['panier']
+            'panier' => $_SESSION['panier'],
+            'total_quantity' => $total_quantity,
+            'total_bill_ht' => $total_bill_ht,
+            'total_bill_ttc' => $total_bill_ttc
         ]);
     }
 
@@ -48,7 +63,8 @@ class BasketController extends AppController
                 'quantity' => $_POST['quantity']
             ];
         } else {
-            $_SESSION['panier']['vehicules'][$vehicle->getId()]['quantity'] += $_POST['quantity'];
+            $quantity = $_SESSION['panier']['vehicules'][$vehicle->getId()]['quantity'];
+            $_SESSION['panier']['vehicules'][$vehicle->getId()]['quantity'] = $quantity + $_POST['quantity'];
         }
 
         FlashMessageHelper::add('success', 'Le / les produits ont été ajoutés au panier.');

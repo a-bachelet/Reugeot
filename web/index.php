@@ -1,11 +1,6 @@
 <?php
 
 /**
- * Démarrage du système de sessions PHP.
- */
-session_start();
-
-/**
  * @var string $base_dir
  * Répertoire actuel.
  */
@@ -82,5 +77,10 @@ $autoload = function ($namespace) use ($autoload_array) {
  * Enregistrment de ma fonction d'autoload par défaut.
  */
 spl_autoload_register($autoload);
+
+/**
+ * Démarrage du système de sessions PHP.
+ */
+session_start();
 
 App\App::init();
