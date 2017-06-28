@@ -14,7 +14,15 @@ class UserController extends AppController
     public function index()
     {
         $userRepo = new UserRepository();
-        $userCount = $userRepo->count();
+
+        foreach ($_GET as $k => $v) {
+            $_GET[$k] = htmlspecialchars($v);
+        }
+
+        $select['role'] = isset($_GET['role']) ? $_GET['role'] : null;
+
+        $userCount = is_null($select['role']) ? $userRepo->count() : count($userRepo->findBy(['role_id' => $select['role']]));
+
         $userByPage = 5;
         $pageCount = ceil($userCount/$userByPage);
         $viewedPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -24,7 +32,7 @@ class UserController extends AppController
         $offset = ($viewedPage - 1) * $userByPage;
         $limit = $userByPage;
         /** @var User[] $users **/
-        $users = $userRepo->findBetween($offset, $limit, 'DESC');
+        $users = is_null($select['role']) ? $userRepo->findBetween($offset, $limit, 'DESC') : $userRepo->findBetweenBy($offset, $limit, 'DESC', ['role_id' => $select['role']]);
 
         $this->render('admin', 'admin.user.index', [
             'page_name' => 'adminUserIndex',

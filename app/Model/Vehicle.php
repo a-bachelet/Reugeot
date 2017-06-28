@@ -151,7 +151,7 @@ class Vehicle extends Model
      */
     public function setProfessional($professional)
     {
-        $this->professional = $professional === 0 ? false : true;
+        $this->professional = $professional === 0 || $professional === '0' ? false : true;
     }
 
     /**

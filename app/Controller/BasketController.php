@@ -53,6 +53,11 @@ class BasketController extends AppController
         /** @var Vehicle $vehicle **/
         $vehicle = $vehicleRepo->find($_POST['id']);
 
+        if ($_SESSION['auth']['role'] === 'ROLE_USER' && $vehicle->isProfessional()) {
+            FlashMessageHelper::add('danger', 'Vous n\'êtes pas autorisé à commander ce type de véhicule');
+            RedirectController::redirect('vehicles');
+        }
+
         if (is_null($vehicle->getId()) || !$vehicle->isActive()) {
             FlashMessageHelper::add('danger', 'Ce véhicule n\'existe plus ou n\'est pas disponible');
             RedirectController::redirect('vehicles');
