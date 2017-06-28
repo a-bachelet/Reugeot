@@ -14,7 +14,7 @@
 
                 <div class="row">
 
-                    <form id="vehicleCategoryForm" class="form-horizontal" action="#" method="POST">
+                    <form id="vehicleBrandForm" class="form-horizontal" action="#" method="POST">
 
                         <?php if (!isset($errors['name'])): ?>
                             <div class="form-group">

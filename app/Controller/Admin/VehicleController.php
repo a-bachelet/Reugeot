@@ -129,8 +129,6 @@ class VehicleController extends AppController
                             'vehicle_picture' => ''
                         ]);
 
-                        var_dump($_POST['model'], $_POST['vehicle_category'], $_POST['vehicle_brand'], $_POST['price_without_taxes'], $priceWithTaxes, $professional, $active);
-
                         $lastId = intval($db->getLastInsertedId());
 
                         imagejpeg($tmp, FOLDER_ROOT . '/web/uploads/vehicles_pics/' . $lastId . '.' . $guessedExtension);
@@ -240,13 +238,14 @@ class VehicleController extends AppController
                         $professional = $_POST['professional'] === 'on' ? 1 : 0;
                         $active = $_POST['active'] === 'on' ? 1 : 0;
 
-                        $query = 'INSERT INTO vehicles (model, vehicle_category_id, vehicle_brand_id, price_without_taxes, price_with_taxes, professional, vehicle_picture, active) VALUES (:model, :vehicle_category_id, :vehicle_brand_id, :price_without_taxes, :price_with_taxes, :professional, :vehicle_picture, :active)';
+                        $query = 'UPDATE vehicles SET model = :model, vehicle_category_id = :vehicle_category_id, vehicle_brand_id = :vehicle_brand_id, price_without_taxes = :price_without_taxes, price_with_taxes = :price_with_taxes, professional = :professional, active = :active WHERE id = :id';
                         $db = AppDatabase::getInstance();
 
                         $db->query($query, false, [
+                            'id' => $vehicle->getId(),
                             'model' => $_POST['model'],
-                            'vehicle_category_id' => $_POST['vehicle_category_id'],
-                            'vehicle_brand_id' => $_POST['vehicle_brand_id'],
+                            'vehicle_category_id' => $_POST['vehicle_category'],
+                            'vehicle_brand_id' => $_POST['vehicle_brand'],
                             'price_without_taxes' => $_POST['price_without_taxes'],
                             'price_with_taxes' => $priceWithTaxes,
                             'professional' => $professional,

@@ -153,6 +153,15 @@ $(document).ready(function() {
             progress_bar.css('width', 0 + '%');
             progress_bar.html('');
             var response = JSON.parse(event.target.responseText);
+            if (response['valid'] === true) {
+                var flashMessage = [];
+                flashMessage['type'] = 'success';
+                flashMessage['message'] = 'Le véhicule a bien été ajouté.';
+            }
+            $('.flashes').append("<div class='alert alert-"+flashMessage['type']+" alert-dismissible flash'>"+flashMessage['message']+"</div>");
+            setTimeout(function () {
+                $('.flash').slideUp();
+            }, 3000);
             console.log(response);
         }, false);
 
