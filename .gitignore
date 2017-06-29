@@ -1,0 +1,17 @@
+# Reugeot Git Ignore File
+
+## JetBrains IDE
+
+.idea/
+
+## BuildIt Framework
+
+core
+
+## Database config
+
+config/database.php
+
+## Uploads folder
+
+web/uploads
